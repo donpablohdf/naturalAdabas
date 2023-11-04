@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TEMPLATE date="2023-11-04" environment="" name="resp" time="15:43:38"
+<TEMPLATE date="2023-11-04" environment="" name="rep" time="17:41:13"
     type="DataBrowser" user="" version="1.0">
     <DEFINITIONS>
         <DESCRIPTION>Report for DDM EMPLOYEES</DESCRIPTION>
-        <RECORDLIMIT>10</RECORDLIMIT>
+        <RECORDLIMIT>30</RECORDLIMIT>
         <FILTEREDBY>&gt;&gt; Physical Read &lt;&lt;</FILTEREDBY>
         <OPTIONS>
             <USEEDITMASK>None</USEEDITMASK>
@@ -22,7 +22,7 @@
         <FIELD Checked="X" Descriptor="" Editmask="" Format="A"
             Header="" Length="20" Level="2" Name="APELLIDO-2" Type=""/>
         <FIELD Checked="X" Descriptor="" Editmask="" Format="A"
-            Header="" Length="1" Level="1" Name="AF-1" Type=""/>
+            Header="" Length="1" Level="1" Name="MAR-STAT" Type=""/>
         <FIELD Checked="X" Descriptor="" Editmask="" Format="A"
             Header="" Length="1" Level="1" Name="SEXO" Type=""/>
         <FIELD Checked="X" Descriptor="D" Editmask="" Format="P"
@@ -47,7 +47,7 @@
         <FIELD Checked="X" Descriptor="" Editmask="" Format="" Header=""
             Length="" Level="1" Name="A2-1" Type="G"/>
         <FIELD Checked="X" Descriptor="" Editmask="" Format="A"
-            Header="" Length="6" Level="2" Name="AN-1" Type=""/>
+            Header="" Length="6" Level="2" Name="LEAVE-DUE" Type=""/>
         <FIELD Checked="X" Descriptor="" Editmask="" Format="A"
             Header="" Length="15" Level="2" Name="AM-1" Type=""/>
         <FIELD Checked="X" Descriptor="D" Editmask="" Format="A"
@@ -139,7 +139,7 @@
     <GENERALFIELDS>
         <FIELD Editmask="" Format="I" Header="" Length="4" Level="1"
             Name=".COUNTER" Type="#"/>
-        <FIELD Editmask="" Format="P" Header="" Length="10" Level="1"
-            Name="*ISN" Type="#"/>
+        <FIELD Checked="X" Editmask="" Format="P" Header="" Length="10"
+            Level="1" Name="*ISN" Type="#"/>
     </GENERALFIELDS>
 </TEMPLATE>
