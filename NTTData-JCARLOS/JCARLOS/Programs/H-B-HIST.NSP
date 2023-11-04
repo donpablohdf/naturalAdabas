@@ -1,0 +1,22 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+*
+* HISTOGRAM 
+*
+* Definición de estructura de datos local
+DEFINE DATA LOCAL
+/*( Campos de datos importados del Módulo de Definición de Datos EMPLOYEES
+1 EMPLOYEES VIEW OF EMPLOYEES
+  2 CIUDAD (A20) /* Campo de datos CIUDAD importado
+/*) Campos de datos importados del Módulo de Definición de Datos EMPLOYEES
+
+*
+END-DEFINE
+*
+HISTOGRAM EMPLOYEES CIUDAD STARTING FROM 'M'
+  DISPLAY NOTITLE CIUDAD 'NUMERO DE/EMPEADOS' *NUMBER *COUNTER
+END-HISTOGRAM
+*
+END

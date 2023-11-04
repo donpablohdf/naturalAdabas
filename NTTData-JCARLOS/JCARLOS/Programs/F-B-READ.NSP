@@ -1,0 +1,78 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+*
+* Definición de estructura de datos local
+DEFINE DATA LOCAL
+1 VEHICLES VIEW OF VEHICLES
+  2 MATRICULA (A15)
+  2 ANIO (N4)
+  2 GRUPO-DETALLE
+    3 MARCA (A20)
+1 SPD-ANIO-MARCA (A24) /* Variable para búsqueda compuesta
+1 REDEFINE SPD-ANIO-MARCA /* Dividido en componentes
+  2 SPD-ANIO (A4)
+  2 SPD-MARCA (A20)
+*
+1 #VARI-A (A20) INIT<'M'> /* Variable alfanumérica inicializada
+1 #VARI-B (N3) /* Variable numérica
+1 #I-ANIO (N4) INIT <1982> /* Inicializa la variable #I-ANIO con 1982
+1 #STARTVAL (A20) INIT <'HONDA'> /* Inicializa la variable #STARTVAL con 'HONDA'
+1 #ATTR (C) /* Variable de control
+END-DEFINE
+*
+WRITE / 'READ EN SECUENCIA FISICA:' (CD=YE AD=U)
+* Realiza una lectura en secuencia física
+READ (3) VEHICLES IN PHYSICAL SEQUENCE
+  DISPLAY NOTITLE *ISN ANIO MATRICULA MARCA *COUNTER
+END-READ
+*
+WRITE / 'READ EN ORDEN DE ISN:' (CD=YE AD=U)
+* Realiza una lectura en orden de ISN (Identificador de Registro)
+READ VEHICLES BY ISN STARTING FROM 2 ENDING AT 3
+  DISPLAY NOTITLE *ISN MATRICULA MARCA *COUNTER
+END-READ
+*
+WRITE / 'READ EN ORDEN AL DESCRIPTOR MATRICULA:' (CD=YE AD=U)
+* Realiza una lectura en orden del descriptor MATRICULA
+READ (3) VEHICLES BY MATRICULA
+  DISPLAY NOTITLE *ISN MATRICULA MARCA *COUNTER
+END-READ
+*
+WRITE / 'READ EN ORDEN AL DESCRIPTOR MATRICULA INICIANDO DESDE LA (M):'(CD=YE AD=U)
+* Realiza una lectura en orden del descriptor MATRICULA a partir de la variable #VARI-A
+READ (3) VEHICLES BY MATRICULA STARTING FROM #VARI-A
+  DISPLAY NOTITLE *ISN MATRICULA MARCA *COUNTER
+END-READ
+*
+DISPLAY NOTITLE 'READ POR SUPERDESCRIPTOR:'(CD=YE AD=U)
+PERFORM LEER-VEH
+DEFINE SUBROUTINE LEER-VEH
+SPD-ANIO := #I-ANIO
+* Realiza una lectura basada en un superdescriptor compuesto
+READ (10) VEHICLES BY SUPER-ANIO-MARCA EQ SPD-ANIO-MARCA
+  IF VEHICLES.ANIO NE #I-ANIO
+    ESCAPE BOTTOM
+  END-IF
+  DISPLAY NOTITLE *ISN ANIO MATRICULA MARCA *COUNTER
+END-READ
+END-SUBROUTINE
+*
+* Realiza una lectura con reubicación basada en la marca
+DISPLAY NOTITLE 'READ CON REPOSICION POR MARCA:'(CD=YE AD=U)
+SET KEY PF3
+READ VEHICLES WITH REPOSITION BY MARCA = #STARTVAL
+  INPUT 'NAME:' MARCA /
+ 'Enter new start value for repositioning:' #STARTVAL (AD=MT CV=#ATTR) /
+    'Press PF3 to stop'
+  IF *PF-KEY = 'PF3'
+    THEN STOP
+  END-IF
+  IF #ATTR MODIFIED
+    THEN RESET *COUNTER
+  END-IF
+  DISPLAY NOTITLE *ISN ANIO MATRICULA MARCA *COUNTER
+END-READ
+*
+END

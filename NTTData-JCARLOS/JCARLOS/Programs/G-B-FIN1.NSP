@@ -1,0 +1,65 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* buscar empleados cuyo apellido comience con 'MORENO' 
+* y mostrar información sobre los vehículos relacionados 
+* con esos empleados
+* Definición de estructuras de datos locales
+DEFINE DATA LOCAL
+1 EMPLOYEES-VIEW VIEW OF EMPLOYEES
+  2 PROPIETARIO-ID
+  2 APELLIDO
+  2 NOMBRE
+  2 CIUDAD
+*
+1 VEHICULOS-VIEW VIEW OF VEHICLES
+  2 PROPIETARIO-ID
+  2 MATRICULA
+  2 GRUPO-DETALLE
+    3 MARCA (A20)
+*
+END-DEFINE
+*
+* Realiza una lectura de 10 registros de EMPLOYEES-VIEW 
+* a partir del APELLIDO 'M'
+RD. READ (10) EMPLOYEES-VIEW BY APELLIDO STARTING FROM 'M'
+*
+  /* Inicia una búsqueda en VEHICULOS-VIEW
+  /* basada en el PROPIETARIO-ID leído en EMPLOYEES-VIEW
+  FD. FIND VEHICULOS-VIEW WITH PROPIETARIO-ID = PROPIETARIO-ID (RD.)
+    /* Comprueba si se encontraron registros en la búsqueda
+    IF NO RECORDS FOUND
+    /* Si no se encontraron registros, muestra que no tiene vehículo
+      DISPLAY NOTITLE (ES=OFF IS=ON ZP=ON AL=15)
+        PROPIETARIO-ID (RD.)
+        APELLIDO (RD.)
+        NOMBRE (RD.)
+        CIUDAD (RD.)
+        'SIN VEHICULO'
+    END-NOREC
+    /* Muestra información de los empleados y sus vehículos
+    DISPLAY NOTITLE (ES=OFF IS=ON ZP=ON AL=15)
+      PROPIETARIO-ID (RD.)
+      APELLIDO (RD.)
+      NOMBRE (RD.)
+      CIUDAD (RD.)
+      MARCA (FD.) (IS=OFF)
+    /* Finaliza la información de los empleados y sus vehículos
+  END-FIND
+*
+* Finaliza la lectura de empleados a partir del APELLIDO 'M'
+END-READ
+*
+FIND EMPLOYEES-VIEW WITH CIUDAD = 'BREMEN' THRU 'DARMSTADT' 
+*
+  IF *NUMBER = 0
+    WRITE 'No Existen Empleados...'
+  ELSE
+    DISPLAY NOTITLE (ES=OFF IS=ON ZP=ON AL=15) *ISN NOMBRE CIUDAD *NUMBER
+  END-IF
+*
+END-FIND
+*
+END
+

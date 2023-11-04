@@ -1,0 +1,31 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* Definición de estructura de datos local
+DEFINE DATA LOCAL
+1 VEHICLES VIEW OF VEHICLES
+  2 MATRICULA (A15)
+  2 ANIO (N4)
+  2 GRUPO-DETALLE
+    3 MARCA (A20)
+1 SPD-ANIO-MARCA (A24) /* super
+1 REDEFINE SPD-ANIO-MARCA /* divide en locales
+  2 SPD-ANIO (A4)
+  2 SPD-MARCA (A20)
+*
+1 #I-ANIO (N4) INIT <1982> /* Inicializa la variable #I-ANIO con 1982
+1 #ATTR (C) /* Variable de control
+END-DEFINE
+*
+PERFORM LEER-VEH
+DEFINE SUBROUTINE LEER-VEH /* Subrutina LEER-VEH
+SPD-ANIO := #I-ANIO /* Asigna el valor de #I-ANIO a SPD-ANIO
+R1. READ (10) VEHICLES BY SUPER-ANIO-MARCA EQ SPD-ANIO-MARCA
+  IF VEHICLES.ANIO NE #I-ANIO
+    ESCAPE BOTTOM /* Sale del bucle si ANIO no coincide con #I-ANIO
+  END-IF
+  DISPLAY NOTITLE *ISN ANIO MATRICULA MARCA *COUNTER /* Muestra información relevante
+END-READ
+END-SUBROUTINE
+END

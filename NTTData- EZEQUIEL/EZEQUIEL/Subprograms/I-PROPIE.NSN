@@ -1,0 +1,38 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+DEFINE DATA PARAMETER
+USING I-PROPI
+LOCAL
+1 VEHICLES VIEW OF VEHICLES
+  2 PROPIETARIO-ID
+1 REG-FOUND (L) INIT <FALSE>
+END-DEFINE
+REPEAT
+/* Si no ha encontrado PROPIETARIO-ID
+  IF REG-FOUND = FALSE
+*
+    INPUT 'INGRESA PROPIETARIO-ID 50000100' INPUT-ID
+*
+    IF INPUT-ID = ' '
+/* Si no se ingresa un valor, se solicita nuevamente
+      REINPUT 'NO RECORD FOUND'
+    END-IF
+*
+/* Busca PROPIETARIO-ID con el INPUT-ID ingresado
+    FIND VEHICLES WITH PROPIETARIO-ID = INPUT-ID
+      IF NO RECORD FOUND
+/* Si no encuentra ningún PROPIETARIO-ID, se solicita nuevamente
+        REINPUT 'PROPIETARIO-ID NO ENCONTRADO'
+      END-NOREC
+/* Establece REG-FOUND como verdadero si encuentra PROPIETARIO-ID
+      MOVE TRUE TO REG-FOUND
+    END-FIND
+/*
+  ELSE /* Sale REPEAT si REG-FOUND es TRUE (PROPIETARIO-ID encontrado)
+    ESCAPE BOTTOM
+  END-IF
+* 
+END-REPEAT
+END

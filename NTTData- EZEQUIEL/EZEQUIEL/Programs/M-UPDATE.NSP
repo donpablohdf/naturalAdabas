@@ -1,0 +1,55 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* Definición de estructura de datos local
+DEFINE DATA LOCAL
+1 VEHICLES VIEW OF VEHICLES
+  2 MATRICULA
+  2 MARCA
+  2 MODELO
+  2 COLOR
+  2 ANIO
+1 MUPDATEV
+  2 M-MATRICULA (A15) /* Campos de entrada para la actualización
+  2 M-MARCA (A20)
+  2 M-MODELO (A20)
+  2 M-COLOR (A10)
+  2 M-ANIO (N4.0)
+1 I-RESPUESTA (A1) /* Variable para la respuesta del usuario (S/N)
+1 I-MATRICULA (A15) INIT <' '>/* Variable para la matrícula a buscar
+END-DEFINE
+CALLNAT "I-MATRI" I-MATRICULA
+*
+* Busca registros de vehículos que coinciden con la matrícula ingresada
+FIND VEHICLES WITH VEHICLES.MATRICULA = I-MATRICULA
+*
+* Asigna valores a los campos de formulario
+MUPDATEV.M-MARCA := VEHICLES.MARCA
+MUPDATEV.M-MODELO := VEHICLES.MODELO
+MUPDATEV.M-COLOR := VEHICLES.COLOR
+MUPDATEV.M-ANIO := VEHICLES.ANIO
+MUPDATEV.M-MATRICULA := VEHICLES.MATRICULA
+
+* Utiliza el mapa 'MUPDATEV' para capturar la actualización de campos
+INPUT USING MAP 'MUPDATEV'
+VEHICLES.MARCA := MUPDATEV.M-MARCA
+VEHICLES.MODELO := MUPDATEV.M-MODELO
+VEHICLES.COLOR := MUPDATEV.M-COLOR
+VEHICLES.ANIO := MUPDATEV.M-ANIO
+
+* Pregunta al usuario si desea realizar la modificación
+INPUT '¿Desea realizar la modificación? (S/N): ' I-RESPUESTA
+EXAMINE I-RESPUESTA TRANSLATE INTO UPPER
+IF I-RESPUESTA = 'S' /* Si la respuesta es 'S' (Sí)
+  UPDATE
+WRITE 'Se ha modificado' VEHICLES.MATRICULA /* Mensaje que indica la modificación
+ELSE /* Si la respuesta no es 'S' (No)
+  WRITE 'La modificación no se ha realizado.' /* Mensaje que indica que la modificación no se ha realizado
+END-IF
+
+END-FIND
+
+END TRANSACTION /* Termina la transacción
+
+END /* Finaliza el bloque de código

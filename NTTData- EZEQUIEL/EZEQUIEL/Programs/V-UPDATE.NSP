@@ -1,0 +1,32 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+DEFINE DATA LOCAL
+
+*
+
+* VISTAS 
+
+*
+
+1 VEHICLES VIEW OF VEHICLES
+
+ 
+  2 GRUPO-DETALLE
+
+    3 MARCA (A20)
+*
+END-DEFINE
+*
+WRITE *PROGRAM *DATE *USER
+*
+G1. GET VEHICLES 773
+
+G1.MARCA             := 'FERRARI'
+
+UPDATE
+
+END TRANSACTION
+
+END

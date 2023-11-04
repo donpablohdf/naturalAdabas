@@ -1,0 +1,26 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* Definición de la estructura de datos local
+DEFINE DATA LOCAL
+1 VEHICLES VIEW OF VEHICLES
+  2 MATRICULA (A15)
+  2 ANIO (N4)
+  2 GRUPO-DETALLE
+    3 MARCA (A20)
+*
+END-DEFINE
+
+* Búsqueda por el criterio de MATRICULA
+WRITE 'Criterio por MATRICULA:'
+FIND VEHICLES WITH MATRICULA = '344RG94'
+  DISPLAY NOTITLE *ISN ANIO MATRICULA MARCA *COUNTER
+END-FIND
+
+* Búsqueda por el criterio de MARCA
+WRITE / 'Criterio por MARCA:'
+FIND VEHICLES WITH MARCA = 'SEAT'
+  DISPLAY NOTITLE *ISN ANIO MATRICULA MARCA *COUNTER
+END-FIND
+END

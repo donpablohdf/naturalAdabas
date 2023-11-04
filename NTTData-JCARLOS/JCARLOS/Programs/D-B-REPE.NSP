@@ -1,0 +1,56 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*                          BUCLE REPEAT
+************************************************************************
+* Definición de una variable contador
+DEFINE DATA LOCAL
+1 #CONTADOR (N8)
+END-DEFINE
+*
+* Muestra un mensaje indicando un bucle infinito
+WRITE 'BUCLE INFINITO' (CD=YE AD=U)
+* Inicia un bucle infinito con la instrucción REPEAT
+REPEAT /* BUCLE INFINITO
+  /* Aumenta el valor de #CONTADOR en 1 en cada iteración
+  ADD 1 TO #CONTADOR
+  /* Si #CONTADOR es igual a 5, sale del bucle utilizando la instrucción ESCAPE BOTTOM
+  IF #CONTADOR = 5
+    /* SALE DEL BUCLE al siguiente comando después de end-repeat
+    ESCAPE BOTTOM
+  END-IF
+  /* MUESTRA EL NÚMERO DEL BUCLE
+  WRITE 'NRO. BUCLE: ' #CONTADOR
+END-REPEAT
+WRITE ' '
+*
+* Muestra un mensaje indicando un bucle controlado con WHILE
+WRITE 'BUCLE CONTROLADO CON WHILE' (CD=YE AD=U)
+* Reinicia el valor de #CONTADOR a 0
+#CONTADOR := 0
+* Inicia un bucle controlado por WHILE
+REPEAT WHILE #CONTADOR <= 5 /* BUCLE CONTROLADO CON WHILE
+  /* Aumenta el valor de #CONTADOR en 1 en cada iteración
+  ADD 1 TO #CONTADOR
+  /* Muestra el número del bucle
+  WRITE 'NRO. BUCLE: ' #CONTADOR
+END-REPEAT
+WRITE ' '
+*
+* Muestra un mensaje indicando un bucle controlado con UNTIL
+WRITE 'BUCLE CONTROLADO CON UNTIL' (CD=YE AD=U)
+* Reinicia el valor de #CONTADOR a 0
+#CONTADOR := 0
+* Inicia un bucle controlado por UNTIL
+REPEAT /* BUCLE CONTROLADO CON UNTIL
+  /* Aumenta el valor de #CONTADOR en 1 en cada iteración
+  ADD 1 TO #CONTADOR
+  /* Muestra el número del bucle
+  WRITE 'NRO. BUCLE: ' #CONTADOR
+  /* Continúa el bucle hasta que #CONTADOR sea igual a 5
+  UNTIL #CONTADOR = 5
+END-REPEAT
+END
+

@@ -1,0 +1,39 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* Definición de estructura de datos local
+DEFINE DATA LOCAL
+1 VEHICLES VIEW OF VEHICLES
+  2 MATRICULA
+1 MDELETEV
+  2 M-MATRICULA (A15) /* Campo de entrada para MATRICULA a eliminar
+1 I-RESPUESTA (A1) /* Variable para la respuesta del usuario (S/N)
+1 I-MATRICULA (A15) INIT <' '>/* Variable para la matrícula a buscar
+END-DEFINE
+CALLNAT "I-MATRI" I-MATRICULA
+* Búsqueda de registros que coinciden con la MATRICULA ingresada
+FIND VEHICLES WITH VEHICLES.MATRICULA = I-MATRICULA
+*
+* Preguntamos si el usuario desea realizar la modificación
+*
+/* Solicita al usuario una respuesta (S/N)
+  INPUT '¿Desea BORRAR el vehículo? (S/N): ' I-RESPUESTA
+*
+/* Convierte la respuesta a mayúsculas para la comparación
+  EXAMINE I-RESPUESTA TRANSLATE INTO UPPER
+*
+  IF I-RESPUESTA = 'S' /* Si la respuesta es 'S' (Sí)
+    DELETE /* Borra el registro actual
+    /* Muestra que el registro ha sido borrado
+    WRITE 'Se ha BORRADO' VEHICLES.MATRICULA
+  ELSE /* Si la respuesta no es 'N' (No)
+    /* Muestra que la modificación no se ha realizado.
+    WRITE 'La modificación no se ha realizado.'
+  END-IF
+*
+END-FIND
+
+END TRANSACTION /* Termina la transacción
+
+END /* Finaliza el bloque de código

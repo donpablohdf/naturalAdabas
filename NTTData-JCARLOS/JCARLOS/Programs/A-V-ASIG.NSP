@@ -1,0 +1,68 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+DEFINE DATA LOCAL
+
+* variables locales
+1 L-VAR1 (N4)
+1 L-VAR2 (N4)
+1 L-VAR3 (A10)
+1 L-VARI-A (A20)
+1 L-VARI-B (N3.2)
+1 L-RESULT (N8)
+1 L-ARRAY (A4/1:3) /* ARREGLO UNA DIMENSION
+1 L-ARRAY1 (I4/1:3,1:3) /* ARREGLO DOS DIMENSIONES
+1 L-ARRAY3 (I4/1:3,1:3,1:3) /* ARREGLO TRES DIMENSIONES
+1 L-INDICE (N2) INIT <1> 
+1 L-ARRAY-A(A10/1:4) INIT (1) <'a'> (2) <'b'> (3) <'c'> (4) <'d'> 
+1 L-ARRAY-B(A10/1:4)
+*
+END-DEFINE
+************************************************************************
+*        PRÁCTICA ASIGNACIÓN DE VALORES
+************************************************************************
+*
+WRITE 'Asigna 5 a L-VAR1 y luego imprime su valor' (CD=YE AD=U)
+MOVE 5 TO L-VAR1
+WRITE 'MOVE 5 TO L-VAR1:' L-VAR1
+  /
+WRITE 'Asigna 5 a L-VAR1 y L-VAR2, luego imprime ambos valores' (CD=YE AD=U)
+MOVE 5 TO L-VAR1 L-VAR2
+WRITE 'MOVE 5 TO L-VAR1 L-VAR2:' L-VAR1 L-VAR2
+  /
+WRITE 'Asigna "A" a L-VAR3 y luego imprime su valor' (CD=YE AD=U)
+MOVE 'A' TO L-VAR3
+WRITE "MOVE 'A' TO L-VAR3:" L-VAR3
+  /
+WRITE 'Asigna L-VAR1 a L-VAR2 y luego imprime el valor de L-VAR2' (CD=YE AD=U)
+MOVE L-VAR1 TO L-VAR2
+WRITE 'MOVE L-VAR1 TO L-VAR2:' L-VAR2
+  /
+WRITE 'Rellena l-var3 con "*" y lo imprime' (CD=YE AD=U)
+MOVE ALL '*' TO L-VAR3
+WRITE "MOVE ALL '*' TO L-VAR3:" L-VAR3
+  /
+*
+* Operaciones con arreglos
+*
+WRITE 'Asigna 3444 a L-ARRAY(L-INDICE) y luego imprime el valor' (CD=YE AD=U)
+MOVE 3444 TO L-ARRAY(L-INDICE)
+WRITE 'MOVE 3444 TO L-ARRAY(L-INDICE):' L-ARRAY(L-INDICE)
+  /
+WRITE 'Asigna el valor de L-ARRAY(L-INDICE) a L-VAR3, imprime L-VAR3' (CD=YE AD=U)
+MOVE L-ARRAY(L-INDICE) TO L-VAR3
+WRITE 'MOVE L-ARRAY(L-INDICE) TO L-VAR3' L-VAR3
+  /
+WRITE 'Asigna L-VAR1 al elemento L-ARRAY(L-INDICE)e imprime ese elemento' (CD=YE AD=U)
+MOVE L-VAR1 TO L-ARRAY(L-INDICE)
+WRITE 'MOVE L-VAR1 TO L-ARRAY(L-INDICE):' L-ARRAY(L-INDICE)
+  /
+WRITE 'Copia todos los valores de L-ARRAY-A a L-ARRAY-B, imprime ambos' (CD=YE AD=U)
+  /
+MOVE L-ARRAY-A(*) TO L-ARRAY-B(*)
+WRITE 'Valores de array-a en array-b:' (CD=PI)
+WRITE '  Array-a:' L-ARRAY-A(*) 
+WRITE '  Array-b:' L-ARRAY-B(*)
+
+END

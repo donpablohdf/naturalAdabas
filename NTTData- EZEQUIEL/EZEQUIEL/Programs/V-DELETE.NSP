@@ -1,0 +1,20 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+DEFINE DATA LOCAL
+
+1 VEHICLES VIEW OF VEHICLES
+
+*
+END-DEFINE
+*
+WRITE *PROGRAM *DATE *USER
+*
+GET VEHICLES 778
+
+DELETE
+                    
+END TRANSACTION
+
+END

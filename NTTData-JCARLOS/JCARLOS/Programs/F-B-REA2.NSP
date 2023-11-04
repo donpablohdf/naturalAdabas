@@ -1,0 +1,43 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* Definición de estructura de datos local
+DEFINE DATA LOCAL
+1 VEHICLES VIEW OF VEHICLES
+  2 MATRICULA (A15)
+  2 ANIO (N4)
+  2 GRUPO-DETALLE
+    3 MARCA (A20)
+1 SPD-ANIO-MARCA (A24) /* Variable para búsqueda compuesta
+1 REDEFINE SPD-ANIO-MARCA /* Dividido en componentes
+  2 SPD-ANIO (A4)
+  2 SPD-MARCA (A20)
+*
+1 #STARTVAL (A20) INIT <'HONDA'> /* Inicializa la variable #STARTVAL con 'HONDA'
+1 #ATTR (C) /* Variable de control
+END-DEFINE
+*
+* Muestra un mensaje de encabezado
+DISPLAY NOTITLE 'READ CON REPOSICION POR MARCA:'(CD=YE AD=U)
+* Configura la tecla PF3 como tecla de control
+SET KEY PF3
+* Realiza una lectura con reubicación basada en la marca
+READ VEHICLES WITH REPOSITION BY MARCA = #STARTVAL
+  /* Solicita entrada del nombre de la marca
+  INPUT 'NAME:' MARCA /
+ 'Enter new start value for repositioning:' #STARTVAL (AD=MT CV=#ATTR) /
+    'Press PF3 to stop'
+  /* Si se presiona la tecla PF3, se detiene la lectura
+  IF *PF-KEY = 'PF3'
+    THEN STOP
+  END-IF
+  /* Si #ATTR se ha modificado, se restablece el contador de registros
+  IF #ATTR MODIFIED
+    THEN RESET *COUNTER
+  END-IF
+  /* Muestra información relevante
+  DISPLAY NOTITLE *ISN ANIO MATRICULA MARCA *COUNTER
+END-READ
+END
+

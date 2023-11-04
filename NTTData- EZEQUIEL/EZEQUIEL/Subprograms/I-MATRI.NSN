@@ -1,0 +1,45 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+DEFINE DATA PARAMETER
+USING I-MATR
+LOCAL
+1 VEHICLES VIEW OF VEHICLES
+  2 MATRICULA
+1 REG-FOUND (L) INIT <FALSE>
+END-DEFINE
+REPEAT
+/* Si no ha encontrado MATRICULA
+  IF REG-FOUND = FALSE
+*
+    INPUT 'INGRESA MATRICULA' I-MATRICULA
+     EXAMINE I-MATRICULA TRANSLATE INTO UPPER
+     MOVE *TRIM(I-MATRICULA) TO I-MATRICULA
+    IF I-MATRICULA = ' '
+/* Si no se ingresa un valor, se solicita nuevamente
+      REINPUT 'NO RECORD FOUND'
+    END-IF
+*
+/* Busca MATRICULA con el I-MATRICULA ingresado
+    FIND VEHICLES WITH VEHICLES.MATRICULA = I-MATRICULA
+      IF NO RECORD FOUND
+/* Si no encuentra ningún MATRICULA, se solicita nuevamente
+        REINPUT 'MATRICULA NO ENCONTRADA'
+      END-NOREC
+/* Establece REG-FOUND como verdadero si encuentra MATRICULA
+      MOVE TRUE TO REG-FOUND
+    END-FIND
+/*
+  ELSE /* Sale REPEAT si REG-FOUND es TRUE (MATRICULA encontrado)
+    ESCAPE BOTTOM
+  END-IF
+* 
+END-REPEAT
+
+END
+

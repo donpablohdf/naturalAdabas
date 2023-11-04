@@ -1,0 +1,67 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* Definición de estructura de datos local
+DEFINE DATA LOCAL
+* definición de la vista de adabas
+1 VEHICLES VIEW OF VEHICLES
+  2 PROPIETARIO-ID
+  2 MATRICULA
+  2 BASTIDOR
+  2 MARCA
+  2 MODELO
+  2 COLOR
+  2 ANIO
+1 VIEW-COMP VIEW OF VEHICLES
+  2 MATRICULA
+  2 BASTIDOR
+
+1 MCREATEV
+  2 M-MATRICULA (A15)
+  2 M-BASTIDOR (B4)
+  2 M-MARCA (A20)
+  2 M-MODELO (A20)
+  2 M-COLOR (A10)
+  2 M-ANIO (N4.0)
+1 INPUT-ID (A8) INIT <' '> /* busqueda de PROPIETARIO-ID
+END-DEFINE
+/* subprograma con INPUT para la eleccion de PROPIETARIO-ID
+CALLNAT "I-PROPIE" INPUT-ID
+*
+* Captura de datos de entrada utilizando el mapa 'MCREATEV'
+*
+INPUT USING MAP 'MCREATEV'
+*
+VEHICLES.PROPIETARIO-ID := INPUT-ID 
+VEHICLES.MATRICULA := MCREATEV.M-MATRICULA
+VEHICLES.BASTIDOR := MCREATEV.M-BASTIDOR
+VEHICLES.MARCA := MCREATEV.M-MARCA
+VEHICLES.MODELO := MCREATEV.M-MODELO
+VEHICLES.COLOR := MCREATEV.M-COLOR
+VEHICLES.ANIO := MCREATEV.M-ANIO
+*
+************************************************************************
+*             Comprobamos que MATRICULA no exista 
+************************************************************************
+*
+* Convierte la matrícula a mayúsculas
+EXAMINE MCREATEV.M-MATRICULA TRANSLATE INTO UPPER 
+*
+* Quita espacios en blanco alrededor de la matrícula
+MOVE *TRIM(MCREATEV.M-MATRICULA) TO MCREATEV.M-MATRICULA
+* 
+FIND VIEW-COMP WITH MATRICULA = MCREATEV.M-MATRICULA
+*
+  IF NO RECORD FOUND /* si MATRICULA no existe crea vehículo
+    END TRANSACTION
+    WRITE 'Vehículo creado con la matricula:' MCREATEV.M-MATRICULA
+    STOP
+  END-NOREC
+  WRITE 'Encontrada MATRICULA:' VEHICLES.MATRICULA
+  STOP
+*
+END-FIND
+*
+END
+

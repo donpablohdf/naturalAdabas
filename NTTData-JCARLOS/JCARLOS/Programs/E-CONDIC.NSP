@@ -1,0 +1,72 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* Definición de variables locales
+DEFINE DATA LOCAL
+1 #CONFIRMAR (A1) /* Variable para confirmar si se necesita ayuda
+1 #VAR1 (N1) /* Variable para entrada de número
+1 #VAR3 (A1) /* Variable para entrada de letra
+1 #OP (N1) /* Variable para operación
+END-DEFINE
+*
+************************************************************************
+*                              IF
+************************************************************************
+*
+* Solicita entrada para confirmar si se necesita ayuda (S/N)
+INPUT 'NECESITAS AYUDA? (S/N):' #CONFIRMAR
+* Comprueba si la respuesta es 'S' (Sí)
+IF #CONFIRMAR = 'S'
+  WRITE 'HA CONFIRMADO QUE REQUIERE AYUDA...'
+ELSE
+*
+  /* COMPRUEBA SI LA RESPUESTA ES 'N' (NO)
+  IF #CONFIRMAR = 'N'
+    WRITE 'HA RECHAZADO LA AYUDA...'
+  ELSE
+    WRITE 'OPCIÓN NO VÁLIDA...'
+  END-IF
+*
+END-IF
+*
+************************************************************************
+*                            DECIDE
+************************************************************************
+*
+* Solicita entrada para la primeras condiciones
+INPUT 'DECIDE FOR FIRST CONDITION -- INTRODUZCA VALOR A,B,C,D,E,F,G (A1) Y 1,2,3 (N1)' #VAR3 #OP
+*
+* Evalúa la primera condición y muestra mensajes en función de la entrada
+DECIDE FOR FIRST CONDITION
+  WHEN #VAR3 = 'A' AND #OP = 1
+    WRITE 'A 1 HA SIDO SELECCIONADA...'
+  WHEN #VAR3 = 'B' AND #OP = 2
+    WRITE 'B 2 HA SIDO SELECCIONADA...'
+  WHEN #VAR3 = 'C' AND #OP = 3
+    WRITE 'C 3 HA SIDO SELECCIONADA...'
+  WHEN #VAR3 = 'D' THRU 'G'
+    WRITE 'HA SIDO SELECCIONADA...' #VAR3 '-' #OP
+  WHEN NONE
+    WRITE 'NO SE HA SELECCIONADO NINGUNA FUNCION...'
+END-DECIDE
+*
+* Solicita entrada para la segunda condición
+INPUT 'DECIDE FOR EVERY CONDITION -- INTRODUZCA VALOR (N1)' #VAR1
+*
+* Evalúa todas las condiciones y muestra mensajes en función de la entrada
+DECIDE FOR EVERY CONDITION
+  WHEN #VAR1 >= 0
+    WRITE '#VAR1 ES UN VALOR POSITIVO...'
+  WHEN #VAR1 <= 0
+    WRITE '#VAR1 ES UN VALOR NEGATIVO...'
+  WHEN ANY /* Opcional
+    WRITE 'UNA DE LAS CONDICIONES ES VERDADERA'
+  WHEN ALL /* Opcional
+    WRITE '#VAR1 ES CERO...'
+  WHEN NONE /* Obligatorio
+    IGNORE
+END-DECIDE
+*
+* Fin del programa
+END

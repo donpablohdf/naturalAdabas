@@ -1,0 +1,42 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* Definición de estructura de datos local
+DEFINE DATA LOCAL
+1 EMPLOYEES-VIEW VIEW OF EMPLOYEES
+  2 PROPIETARIO-ID
+  2 APELLIDO
+  2 NOMBRE
+*
+1 CIUDAD-VIEW VIEW OF EMPLOYEES
+  2 CIUDAD
+*
+1 #ISN (B4) /* Variable para el número ISN
+1 #I (N5) /* Variable de iteración
+1 #NRO-LINEAS (N5) /* Variable para el número de líneas
+*
+END-DEFINE
+*
+RD. READ (10) EMPLOYEES-VIEW BY APELLIDO STARTING FROM 'J' /* Leer empleados cuyo apellido comienza con 'J'
+  MOVE *ISN TO #ISN /* Almacena el ISN actual en #ISN
+  DISPLAY NOTITLE NOMBRE APELLIDO *COUNTER /* Muestra el nombre y apellido
+*
+  GET CIUDAD-VIEW #ISN /* Obtiene la CIUDAD para el empleado actual
+  WRITE 'CIUDAD EMPLEADO: ' CIUDAD /* Muestra la CIUDAD del empleado
+*
+END-READ
+*
+READ EMPLOYEES-VIEW BY APELLIDO /* Leer empleados por apellido
+  WRITE //  APELLIDO /* Muestra el apellido con un salto de línea
+  WRITE / NOMBRE /* Muestra el nombre
+*
+  FOR #I 2 TO #NRO-LINEAS /* Inicia un bucle para leer más ocurrencias
+    GET SAME /* Lee la siguiente ocurrencia del mismo tipo
+    WRITE PROPIETARIO-ID /* Muestra el PROPIETARIO-ID de la ocurrencia
+  END-FOR
+*
+  WRITE / NOMBRE APELLIDO /* Muestra el nombre y apellido del último empleado
+  ADD 1 TO #NRO-LINEAS /* Incrementa el contador de líneas
+END-READ
+END
