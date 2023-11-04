@@ -7,11 +7,11 @@ DEFINE DATA LOCAL
 1 EMPLOY-VIEW VIEW OF EMPLOYEES
   /* Declaración del campo NOMBRE en EMPLOY-VIEW */
   2 NOMBRE
-  /* Declaración del campo APELLIDO en EMPLOY-VIEW */
+    /* Declaración del campo APELLIDO en EMPLOY-VIEW */
   2 APELLIDO
-  /* Declaración del campo COD-POSTAL en EMPLOY-VIEW */
+    /* Declaración del campo COD-POSTAL en EMPLOY-VIEW */
   2 COD-POSTAL
-  /* Declaración del campo CIUDAD en EMPLOY-VIEW */
+    /* Declaración del campo CIUDAD en EMPLOY-VIEW */
   2 CIUDAD
 /* Declaración de una variable local llamada #NW-APELLIDO con una longitud máxima de 20 caracteres */
 1 #NW-APELLIDO (A20)
@@ -24,7 +24,7 @@ FORMAT PS=21
 REPEAT
   /* Lee registros de EMPLOY-VIEW por APELLIDO igual a #NW-APELLIDO */
   READ (15) EMPLOY-VIEW BY APELLIDO = #NW-APELLIDO
-    /* Muestra los valores de NOMBRE, APELLIDO, COD-POSTAL y CIUDAD en la salida */
+/* Muestra los valores de NOMBRE, APELLIDO, COD-POSTAL y CIUDAD en la salida */
     DISPLAY NOTITLE NOMBRE APELLIDO COD-POSTAL CIUDAD
   END-READ
 
@@ -37,13 +37,14 @@ REPEAT
     MOVE APELLIDO TO #NW-APELLIDO
     /* Solicita la reposición de la búsqueda por apellido */
     INPUT / '-' (79)
-          / 10T 'Reposicion de busqueda por apellido ==>'
-                #NW-APELLIDO (AD=MI) '(''.'' to exit)'
+      / 10T 'Reposicion de busqueda por apellido ==>'
+      #NW-APELLIDO (AD=MI) '(''.'' to exit)'
+    EXAMINE #NW-APELLIDO TRANSLATE INTO UPPER
     /* Si #NW-APELLIDO es igual a '.', detiene el programa */
     IF #NW-APELLIDO = '.'
       STOP
     END-IF
-  /* Fin de la página */
+    /* Fin de la página */
   END-ENDPAGE
 /* Fin del bucle de repetición */
 END-REPEAT
