@@ -27,7 +27,7 @@ INPUT          (     IP=OFF                                           /*
 /
  009T 'Matricula.:'
  022T M-MATRICULA /*.99U015 A015 .
-      (AD=MDTO )
+      (AD=O )
 /
 /
  009T 'Marca.....:'

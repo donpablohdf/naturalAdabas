@@ -29,7 +29,7 @@ INPUT          (     IP=OFF                                           /*
 /
  009T 'Propietario.:'
  024T INPUT-ID /*.99U015 A008 .
-      (AD=MDT AL=015 )
+      (AD=O AL=015 )
 /
 /
  009T 'Matricula...:'
