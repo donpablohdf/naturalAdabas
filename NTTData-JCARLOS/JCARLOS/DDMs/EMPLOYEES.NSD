@@ -23,7 +23,7 @@ M 2 AI DIRECCION                         A   20  N
   2 AK COD-POSTAL                        A   10  N 
   2 AL AL-1                              A    3  N 
 G 1 A2 A2-1 
-  2 AN AN-1                              A    6  N 
+  2 AN LEAVE-DUE                         A    6  N 
   2 AM AM-1                              A   15  N 
   1 AO DEPARTAMENTO                      A    6    D 
   1 AP PROFESION                         A   25  N D 
