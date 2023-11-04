@@ -8,12 +8,17 @@ DEFINE DATA LOCAL
   2 PROPIETARIO-ID
     /* Declaración del campo NOMBRE en EMPLOY-VIEW 
   2 NOMBRE
+  2 APELLIDO
+  2 COD-POSTAL
+  2 CIUDAD
     /* Declaración del campo PROFESION en EMPLOY-VIEW 
   2 PROFESION
     /* Declaración del campo SALARIO con precisión 1 en EMPLOY-VIEW 
   2 SALARIO (1)
     /* Declaración del campo CURR-CODE con precisión 1 en EMPLOY-VIEW 
   2 CURR-CODE (1)
+*                                                                       
+1 #START-NAME (A20)  
 END-DEFINE
 
 /* Establece un formato de página de 10 líneas 
@@ -35,6 +40,6 @@ READ EMPLOY-VIEW BY PROPIETARIO-ID FROM '20017000'
     /* Fin de la página 
   END-ENDPAGE
 END-READ
-
-/* Fin del programa 
+ 
+                                          
 END
