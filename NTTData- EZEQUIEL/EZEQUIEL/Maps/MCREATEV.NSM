@@ -27,37 +27,38 @@ INPUT          (     IP=OFF                                           /*
  008T '........CREA VEHICULO.........'(B)
 /
 /
- 022T INPUT-ID /*.99U008 A008 .
+ 009T 'Propietario.:'
+ 024T INPUT-ID /*.99U015 A008 .
+      (AD=MDT AL=015 )
+/
+/
+ 009T 'Matricula...:'
+ 024T M-MATRICULA /*.99U015 A015 .
       (AD=MDT )
 /
 /
- 009T 'Matricula.:'
- 022T M-MATRICULA /*.99U015 A015 .
-      (AD=MDT )
-/
-/
- 009T 'Bastidor..:'
- 022T M-BASTIDOR /*.99U015 B004 .
+ 009T 'Bastidor....:'
+ 024T M-BASTIDOR /*.99U015 B004 .
       (AD=MDT NL=08.0 )
 /
 /
- 009T 'Marca.....:'
- 022T M-MARCA /*.99U015 A020 .
+ 009T 'Marca.......:'
+ 024T M-MARCA /*.99U015 A020 .
       (AD=MDT AL=015 )
 /
 /
- 009T 'Modelo....:'
- 022T M-MODELO /*.99U015 A020 .
+ 009T 'Modelo......:'
+ 024T M-MODELO /*.99U015 A020 .
       (AD=MDT AL=015 )
 /
 /
- 009T 'Color.....:'
- 022T M-COLOR /*.99U015 A010 .
+ 009T 'Color.......:'
+ 024T M-COLOR /*.99U015 A010 .
       (AD=MDT AL=015 )
 /
 /
- 009T 'Anio......:'
- 022T M-ANIO /*.99U015 N04.0.
+ 009T 'Anio........:'
+ 024T M-ANIO /*.99U015 N04.0.
       (AD=MDT NL=15.0 )
 /
 /
