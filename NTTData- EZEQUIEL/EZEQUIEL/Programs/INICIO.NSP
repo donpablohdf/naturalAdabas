@@ -1,0 +1,33 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+DEFINE DATA LOCAL
+1 M-OPCION (N4)
+1 M-ERR (A66)
+END-DEFINE
+*
+RESET M-ERR
+*
+SET KEY PF3 NAMED 'Salir del programa'
+*
+REPEAT
+*
+  INPUT USING MAP 'MINICIO'
+  DECIDE ON FIRST *PF-KEY
+    VALUE 'ENTR'
+      RESET M-ERR
+      PERFORM EJECUTAR-OPCION
+    VALUE 'PF3'
+        ESCAPE ROUTINE
+    NONE VALUE
+      IGNORE
+  END-DECIDE
+END-REPEAT
+*
+**********************************
+DEFINE SUBROUTINE EJECUTAR-OPCION
+**********************************
+WRITE 'hola'
+END-SUBROUTINE
+END

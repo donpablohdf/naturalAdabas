@@ -1,0 +1,157 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* MAP2: PROTOTYPE VERSION 820 --- CREATED BY ONE 9.3.1 ---
+* INPUT USING MAP 'XXXXXXXX'
+*     F-ANIO M-ANIO(*) M-COLOR(*) M-MARCA(*) M-MATRICULA(*) M-SEL(*)
+DEFINE DATA PARAMETER
+1 F-ANIO (N04.0)
+1 M-ANIO (N04.0/00001:00010)
+1 M-COLOR (A010/00001:00010)
+1 M-MARCA (A020/00001:00010)
+1 M-MATRICULA (A015/00001:00010)
+1 M-SEL (A001/00001:00010)
+END-DEFINE
+FORMAT PS=024 LS=080 ZP=OFF SG=OFF KD=OFF IP=OFF
+* MAP2: MAP PROFILES *****************************        200***********
+* .TTAAAMMOO   D I D I N D I D I        ?_)^&:+(                       *
+* 024079        N0NNUCN             X        01 SYSPROF NR             *
+************************************************************************
+INPUT          (     IP=OFF                                           /*
+                                                                       )
+/
+/
+ 005T 'Año'
+ 009T F-ANIO /*.99U004 N04.0.
+      (AD=MDT )
+/
+/
+/
+ 001T 'SEL  Año      Matricula            Marca            Modelo'
+/
+ 002T M-SEL (1) /*.99U001 A001 .
+      (AD=MDT )
+   /**A1000100000100001000010000100001100010001001000001000HV
+ 005T M-ANIO (1) /*.01U004 N04.0.
+      (AD=OD )
+   /**A1000100000100001000010000100001100010001001000001000HV
+ 011T M-MATRICULA (1) /*.01U015 A015 .
+      (AD=OD )
+   /**A1000100000100001000010000100001100010001001000001000HV
+ 028T M-MARCA (1) /*.01U020 A020 .
+      (AD=OD )
+   /**A1000100000100001000010000100001100010001001000001000HV
+ 050T M-COLOR (1) /*.01U010 A010 .
+      (AD=OD )
+   /**A1000100000100001000010000100001100010001001000001000HV
+/
+ 002T M-SEL (2) /*.99U001 A001 .
+      (AD=MDT )
+ 005T M-ANIO (2) /*.01U004 N04.0.
+      (AD=OD )
+ 011T M-MATRICULA (2) /*.01U015 A015 .
+      (AD=OD )
+ 028T M-MARCA (2) /*.01U020 A020 .
+      (AD=OD )
+ 050T M-COLOR (2) /*.01U010 A010 .
+      (AD=OD )
+/
+ 002T M-SEL (3) /*.99U001 A001 .
+      (AD=MDT )
+ 005T M-ANIO (3) /*.01U004 N04.0.
+      (AD=OD )
+ 011T M-MATRICULA (3) /*.01U015 A015 .
+      (AD=OD )
+ 028T M-MARCA (3) /*.01U020 A020 .
+      (AD=OD )
+ 050T M-COLOR (3) /*.01U010 A010 .
+      (AD=OD )
+/
+ 002T M-SEL (4) /*.99U001 A001 .
+      (AD=MDT )
+ 005T M-ANIO (4) /*.01U004 N04.0.
+      (AD=OD )
+ 011T M-MATRICULA (4) /*.01U015 A015 .
+      (AD=OD )
+ 028T M-MARCA (4) /*.01U020 A020 .
+      (AD=OD )
+ 050T M-COLOR (4) /*.01U010 A010 .
+      (AD=OD )
+/
+ 002T M-SEL (5) /*.99U001 A001 .
+      (AD=MDT )
+ 005T M-ANIO (5) /*.01U004 N04.0.
+      (AD=OD )
+ 011T M-MATRICULA (5) /*.01U015 A015 .
+      (AD=OD )
+ 028T M-MARCA (5) /*.01U020 A020 .
+      (AD=OD )
+ 050T M-COLOR (5) /*.01U010 A010 .
+      (AD=OD )
+/
+ 002T M-SEL (6) /*.99U001 A001 .
+      (AD=MDT )
+ 005T M-ANIO (6) /*.01U004 N04.0.
+      (AD=OD )
+ 011T M-MATRICULA (6) /*.01U015 A015 .
+      (AD=OD )
+ 028T M-MARCA (6) /*.01U020 A020 .
+      (AD=OD )
+ 050T M-COLOR (6) /*.01U010 A010 .
+      (AD=OD )
+/
+ 002T M-SEL (7) /*.99U001 A001 .
+      (AD=MDT )
+ 005T M-ANIO (7) /*.01U004 N04.0.
+      (AD=OD )
+ 011T M-MATRICULA (7) /*.01U015 A015 .
+      (AD=OD )
+ 028T M-MARCA (7) /*.01U020 A020 .
+      (AD=OD )
+ 050T M-COLOR (7) /*.01U010 A010 .
+      (AD=OD )
+/
+ 002T M-SEL (8) /*.99U001 A001 .
+      (AD=MDT )
+ 005T M-ANIO (8) /*.01U004 N04.0.
+      (AD=OD )
+ 011T M-MATRICULA (8) /*.01U015 A015 .
+      (AD=OD )
+ 028T M-MARCA (8) /*.01U020 A020 .
+      (AD=OD )
+ 050T M-COLOR (8) /*.01U010 A010 .
+      (AD=OD )
+/
+ 002T M-SEL (9) /*.99U001 A001 .
+      (AD=MDT )
+ 005T M-ANIO (9) /*.01U004 N04.0.
+      (AD=OD )
+ 011T M-MATRICULA (9) /*.01U015 A015 .
+      (AD=OD )
+ 028T M-MARCA (9) /*.01U020 A020 .
+      (AD=OD )
+ 050T M-COLOR (9) /*.01U010 A010 .
+      (AD=OD )
+/
+ 002T M-SEL (10) /*.99U001 A001 .
+      (AD=MDT )
+ 005T M-ANIO (10) /*.01U004 N04.0.
+      (AD=OD )
+ 011T M-MATRICULA (10) /*.01U015 A015 .
+      (AD=OD )
+ 028T M-MARCA (10) /*.01U020 A020 .
+      (AD=OD )
+ 050T M-COLOR (10) /*.01U010 A010 .
+      (AD=OD )
+/
+/
+/
+/
+/
+/
+/
+/
+* MAP2: VALIDATION *****************************************************
+* MAP2: END OF MAP *****************************************************
+END

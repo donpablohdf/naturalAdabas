@@ -2,11 +2,7 @@
 * :Mode S
 * :CP
 * <Natural Source Header
-* >Natural Source Header 000000
-* :Mode S
-* :CP
-* <Natural Source Header
-DEFINE DATA PARAMETER
+DEFINE DATA LOCAL
 USING I-MATR
 LOCAL
 1 VEHICLES VIEW OF VEHICLES
