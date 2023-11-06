@@ -2,9 +2,7 @@
 * :Mode S
 * :CP
 * <Natural Source Header
-* Definición de estructura de datos local
 DEFINE DATA LOCAL
-* definición de la vista de adabas
 1 VEHICLES VIEW OF VEHICLES
   2 PROPIETARIO-ID
   2 MATRICULA
