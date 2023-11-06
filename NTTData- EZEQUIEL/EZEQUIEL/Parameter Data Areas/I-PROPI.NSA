@@ -3,5 +3,5 @@ DEFINE DATA PARAMETER
 /* :Mode S
 /* :CP
 /* <Natural Source Header
-1 INPUT-ID (A8)
+1 INPUT-ID (A8) 
 END-DEFINE
