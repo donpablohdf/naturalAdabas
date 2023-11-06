@@ -44,12 +44,12 @@ EXAMINE I-RESPUESTA TRANSLATE INTO UPPER
 IF I-RESPUESTA = 'S' /* Si la respuesta es 'S' (Sí)
   UPDATE
 WRITE 'Se ha modificado' VEHICLES.MATRICULA /* Mensaje que indica la modificación
-ELSE /* Si la respuesta no es 'S' (No)
+ELSE /* Si la respuesta no es 'N' (No)
   WRITE 'La modificación no se ha realizado.' /* Mensaje que indica que la modificación no se ha realizado
 END-IF
 
 END-FIND
 
-END TRANSACTION /* Termina la transacción
+END TRANSACTION
 
-END /* Finaliza el bloque de código
+END 

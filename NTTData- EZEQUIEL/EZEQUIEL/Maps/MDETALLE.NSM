@@ -28,7 +28,7 @@ INPUT          (     IP=OFF                                           /*
 /
 /
 /
- 001T 'SEL  Año      Matricula            Marca            Modelo'
+ 001T 'SEL  Año      Matricula            Marca           Modelo'
 /
  002T M-SEL (1) /*.99U001 A001 .
       (AD=MDT )

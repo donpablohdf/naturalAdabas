@@ -24,7 +24,7 @@ INPUT          (     IP=OFF                                           /*
 /
 /
 /
- 008T '........CREA VEHICULO.........'(B)
+ 008T '........CREAR VEHICULO........'(B)
 /
 /
  009T 'Propietario.:'
@@ -38,7 +38,7 @@ INPUT          (     IP=OFF                                           /*
 /
 /
  009T 'Bastidor....:'
- 024T M-BASTIDOR /*.99U015 B004 .
+ 024T M-BASTIDOR /*.99U016 B004 .
       (AD=MDT NL=08.0 )
 /
 /

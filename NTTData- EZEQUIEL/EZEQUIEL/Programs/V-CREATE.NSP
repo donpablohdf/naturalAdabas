@@ -34,7 +34,7 @@ END-DEFINE
 WRITE *PROGRAM *DATE *USER
 
 PROPIETARIO-ID     := 50000100
-MATRICULA          := '00000'
+MATRICULA          := '00000AA'
 BASTIDOR           := 38448
 MARCA              := 'ssAUDI'
 MODELO             := 'PANDA'
