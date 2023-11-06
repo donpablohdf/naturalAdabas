@@ -1,0 +1,21 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+DEFINE DATA LOCAL
+*
+1 EMPLOYEES VIEW OF EMPLOYEES
+  2 PROPIETARIO-ID (A8)
+  2 NOMBRE (A20)
+  2 CIUDAD (A20)
+*
+END-DEFINE
+*
+DEFINE WORK FILE 1 'empleados.txt' 
+*
+FIND EMPLOYEES WITH CIUDAD = 'PARIS'                                   
+  WRITE WORK FILE 1 PROPIETARIO-ID ': ' NOMBRE ': ' CIUDAD
+  WRITE NOTITLE PROPIETARIO-ID ': ' NOMBRE ': ' CIUDAD                                             
+END-FIND 
+*
+END
