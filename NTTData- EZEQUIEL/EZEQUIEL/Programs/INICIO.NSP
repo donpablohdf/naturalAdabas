@@ -2,32 +2,47 @@
 * :Mode S
 * :CP
 * <Natural Source Header
-DEFINE DATA LOCAL
-1 M-OPCION (N4)
-1 M-ERR (A66)
+DEFINE DATA 
+LOCAL
+*
+1 M-OPCION   (N4)
+1 M-ERR      (A66)
+*
 END-DEFINE
 *
 RESET M-ERR
-*
-SET KEY PF3 NAMED 'Salir del programa'
+SET KEY PF3 NAMED 'SALIR'
 *
 REPEAT
 *
   INPUT USING MAP 'MINICIO'
+*
   DECIDE ON FIRST *PF-KEY
     VALUE 'ENTR'
       RESET M-ERR
       PERFORM EJECUTAR-OPCION
     VALUE 'PF3'
-        ESCAPE ROUTINE
+      ESCAPE ROUTINE
+
     NONE VALUE
       IGNORE
   END-DECIDE
 END-REPEAT
 *
-**********************************
+*********************************
 DEFINE SUBROUTINE EJECUTAR-OPCION
-**********************************
-WRITE 'hola'
+*********************************
+*
+DECIDE ON EVERY VALUE OF M-OPCION                                         
+  VALUE 1                                                           
+     FETCH RETURN 'PCREATV1'                              
+  VALUE 2                                                           
+     FETCH RETURN 'PREADVED'                                                                       
+  NONE VALUE                                                            
+    M-ERR := 'OPCION INTRODUCIDA NO VÁLIDA'
+END-DECIDE
+
+**************
 END-SUBROUTINE
+**************
 END
