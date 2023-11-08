@@ -2,6 +2,7 @@
 * :Mode S
 * :CP
 * <Natural Source Header
+*
 ************************************************************************
 *                                                                      *
 *                     De la ayuda de NaturalOne                       *
@@ -17,45 +18,45 @@ DEFINE DATA LOCAL
   2 NAME                                                                
   2 PERSONNEL-ID
   2 CITY
-  2 BIRTH                                                     
+  2 BIRTH      
+  2 JOB-TITLE
+  2 FIRST-NAME
 *
-1 VEHIC-VIEW VIEW OF VEHICLES                                           
+1 VEHIC-VIEW VIEW OF VEHICLES   
+  2 PROPIETARIO-ID
   2 MARCA
 *                                                                 
 1 #PASSWORD (A8)
-1 #CIPHER   (N8)                                                        
+1 #CIPHER   (N8)
+1 #BIRTH (D)   
+1 #BIRTH2 (D)                                                          
+*                                                       
 END-DEFINE                                                              
 
-** Example FIND (with SORTED BY clause)                       
-************************************************************************
-*
-WRITE NOTITLE 'WITH CITY = ''FRANKFURT'' SORTED BY NAME PERSONNEL-ID'                                                                    
-FIND (10) EMPLOY-VIEW WITH CITY = 'FRANKFURT' SORTED BY NAME PERSONNEL-ID
-  DISPLAY NOTITLE NAME (IS=ON) PERSONNEL-ID                  
-END-FIND                                                                              
-*
-NEWPAGE
 *
 * EXAMPLE 3 - BASIC SEARCH CRITERIA IN WITH CLAUSE
 *
 DISPLAY NOTITLE 'BASIC SEARCH CRITERIA IN WITH CLAUSE'(CD=YE AD=U) /                                                                    
-FIND (2) EMPLOY-VIEW WITH NAME = 'SMITH'
-  WRITE NOTITLE 'WITH NAME:' NAME  CITY BIRTH
+FIND (2) EMPLOY-VIEW WITH NAME = 'AHL'
+  WRITE NOTITLE 'WITH NAME:' NAME CITY BIRTH
 END-FIND
 WRITE NOTITLE '---------------------------------------------------------'
 *
 FIND (2) EMPLOY-VIEW WITH CITY NE 'BOSTON'
-  WRITE NOTITLE 'WITH CITY NE ''BOSTON'':'NAME  CITY 
+  WRITE NOTITLE 'WITH CITY NE ''BOSTON'':' NAME  CITY 
 END-FIND
 WRITE NOTITLE '---------------------------------------------------------'
 *
-FIND (2) EMPLOY-VIEW WITH BIRTH = 610803
-  WRITE NOTITLE 'WITH BIRTH = 610803: ' NAME CITY BIRTH
+MOVE EDITED '19400101' TO #BIRTH (EM=YYYYMMDD)
+FIND (2) EMPLOY-VIEW WITH BIRTH = #BIRTH
+  WRITE NOTITLE 'WITH BIRTH = #BIRTH: ' NAME CITY BIRTH
 END-FIND
 WRITE NOTITLE '---------------------------------------------------------'
 *
-FIND (2) EMPLOY-VIEW WITH BIRTH = 610803 THRU 610811
-  WRITE NOTITLE 'WITH BIRTH = 610803 THRU 610811: ' NAME BIRTH
+MOVE EDITED '19450101' TO #BIRTH2 (EM=YYYYMMDD)
+* 
+FIND (2) EMPLOY-VIEW WITH BIRTH = #BIRTH THRU #BIRTH2
+  WRITE NOTITLE 'WITH BIRTH = #BIRTH THRU #BIRTH2: ' NAME BIRTH
 END-FIND
 WRITE NOTITLE '---------------------------------------------------------'
 *
@@ -64,22 +65,72 @@ FIND (3) EMPLOY-VIEW WITH NAME = 'ADAM' OR = 'BAILLET' OR = 'BLOND'
 END-FIND
 WRITE NOTITLE '---------------------------------------------------------'
 *
-FIND (1) EMPLOY-VIEW WITH PERSONNEL-ID = '50002500' THRU '50004000' BUT NOT '50004100' THRU '50005300'
-WRITE NOTITLE "PERSONNEL-ID = '50002500' THRU '50004000' BUT NOT '50004100' THRU '50005300'" /
-  WRITE NOTITLE NAME PERSONNEL-ID CITY BIRTH
+FIND (2) EMPLOY-VIEW WITH PERSONNEL-ID = '2500' THRU '4000' 
+* BUT NOT '4000' THRU '5000'
+  WRITE NOTITLE "valor THRU valor2 BUT NOT valor3 THRU valor 4:" NAME
 END-FIND
 WRITE NOTITLE '---------------------------------------------------------'
 *
+NEWPAGE
+*
+** Example FIND (with SORTED BY clause)                       
+************************************************************************
+*
+WRITE NOTITLE 'WITH CITY = ''FRANKFURT'' SORTED BY NAME PERSONNEL-ID' (CD=YE AD=U)                                                                   
+FIND (10) EMPLOY-VIEW WITH CITY = 'FRANKFURT' SORTED BY NAME PERSONNEL-ID
+  DISPLAY NOTITLE NAME (IS=ON) PERSONNEL-ID                  
+END-FIND                                                                              
+*
+NEWPAGE
+*
+** FIND (with RETAIN clause and RELEASE statement)    
+************************************************************************
+*                                                                      
+DISPLAY NOTITLE 'FIND (with RETAIN clause and RELEASE statement)'(CD=YE AD=U) /                                                                          
+FIND NUMBER EMPLOY-VIEW WITH BIRTH GT #BIRTH RETAIN AS 'AGESET1'                                         
+IF *NUMBER = 0                                                          
+  STOP                                                                  
+END-IF                                                                  
+*                                                                       
+FIND (10) EMPLOY-VIEW WITH 'AGESET1' AND CITY = 'NEW YORK'
+  DISPLAY NOTITLE NAME CITY BIRTH (EM=YYYY-MM-DD)    
+END-FIND                                             
+*                                                    
+RELEASE SET 'AGESET1'      
+*
+NEWPAGE
+*
+** FIND (with WHERE clause)                           
+************************************************************************
+*
+DISPLAY NOTITLE 'FIND (with WHERE clause)'(CD=YE AD=U) /            
+FIND EMPLOY-VIEW WITH CITY = 'PARIS'                                    
+    WHERE JOB-TITLE = 'INGENIEUR COMMERCIAL'
+  DISPLAY NOTITLE                                                       
+    CITY JOB-TITLE PERSONNEL-ID NAME
+END-FIND     
+*
+NEWPAGE
 *
 *
-*
-*
-*
-*
-*
-*
-*
-*
+** FIND (using IF NO RECORDS FOUND)                   
+************************************************************************
+DISPLAY NOTITLE 'FIND (using IF NO RECORDS FOUND)'(CD=YE AD=U) /            
+EMP. READ (5) EMPLOY-VIEW BY NAME STARTING FROM 'JONES'                     
+  /*                                                                    
+  VEH. FIND VEHIC-VIEW WITH PROPIETARIO-ID = PERSONNEL-ID (EMP.)
+*        
+    IF NO RECORDS FOUND                                                 
+      MOVE '*** NO CAR ***' TO MARCA                                     
+    END-NOREC                                                    
+*                              
+    DISPLAY NOTITLE                  
+      NAME (EMP.) (IS=ON)
+      FIRST-NAME (EMP.) (IS=ON)
+      MARCA (VEH.)
+  END-FIND                           
+*                              
+END-READ     
 *
 *
 *
