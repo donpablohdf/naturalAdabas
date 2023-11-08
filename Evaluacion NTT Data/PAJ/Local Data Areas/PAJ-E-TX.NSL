@@ -1,0 +1,24 @@
+DEFINE DATA LOCAL
+/* >Natural Source Header 000000
+/* :Mode S
+/* :CP
+/* <Natural Source Header
+*
+1 PAJ-MENU 
+  2 M-TITLE (A23) INIT <'GESTIÓN DE USUARIOS'>
+  2 OP1 (A23) INIT <'1. CREAR EMPLEADO'>
+    2 OP1-NOM-ARCH (A8) INIT <'EM-CR'>
+*  
+  2 OP2 (A23) INIT <'2. LEER EMPLEADO'>
+    2 OP2-NOM-ARCH (A8) INIT <'EM-RE'>
+*  
+  2 OP3 (A23) INIT <'3. MODIFICAR EMPLEADO'>
+    2 OP3-NOM-ARCH (A8) INIT <'EM-UP'>
+*  
+  2 OP4 (A23) INIT <'4. BORRAR EMPLEADO'>
+    2 OP4-NOM-ARCH (A8) INIT <'EM-DE'>
+* 
+  2 OP5 (A23) INIT <'5. INFORMES'>
+    2 OP5-NOM-ARCH (A8) INIT <'EM-IN'>
+*
+END-DEFINE

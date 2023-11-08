@@ -1,0 +1,62 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+* *
+* *
+* ** AUTOR: PAJ
+*
+** ** FECHA: 8 nov 2023
+* 
+* 
+************************************************************************
+************************************************************************
+************************MENÚ DE INICIO**********************************
+************************************************************************
+*
+DEFINE DATA 
+LOCAL USING PAJ-I-TX
+LOCAL
+*
+1 PAJ-OPCION   (N1)
+1 PAJ-ERR      (A66)
+*
+END-DEFINE
+*
+RESET PAJ-ERR
+SET KEY PF3 NAMED 'SALIR'
+*
+REPEAT
+*
+  INPUT USING MAP 'M-INICIO'
+*
+  DECIDE ON FIRST *PF-KEY
+    VALUE 'ENTR'
+      RESET PAJ-ERR
+      PERFORM IR-A-PRG
+    VALUE 'PF3'
+      ESCAPE ROUTINE
+    NONE VALUE
+      IGNORE
+  END-DECIDE
+END-REPEAT
+*
+*********************************
+DEFINE SUBROUTINE IR-A-PRG
+*********************************
+*
+DECIDE ON EVERY VALUE OF PAJ-OPCION                                         
+  VALUE 1                                                           
+     FETCH RETURN PAJ-INICIO-MENU.OP1-NOM-ARCH                              
+  VALUE 2                                                           
+     FETCH RETURN PAJ-INICIO-MENU.OP2-NOM-ARCH                                                                       
+  NONE VALUE                                                            
+    PAJ-ERR := 'OPCIÓN INTRODUCIDA NO VÁLIDA'
+END-DECIDE
+*
+**************
+END-SUBROUTINE
+**************
+*
+END

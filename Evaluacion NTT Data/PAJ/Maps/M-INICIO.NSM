@@ -1,0 +1,58 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* MAP2: PROTOTYPE VERSION 820 --- CREATED BY ONE 9.3.1 ---
+* INPUT USING MAP 'XXXXXXXX'
+*     PAJ-ERR PAJ-INICIO-MENU.OP1 PAJ-INICIO-MENU.OP2 PAJ-OPCION
+DEFINE DATA PARAMETER
+1 PAJ-ERR (A066)
+1 PAJ-INICIO-MENU.OP1 (A023)
+1 PAJ-INICIO-MENU.OP2 (A023)
+1 PAJ-OPCION (N01.0)
+END-DEFINE
+FORMAT PS=024 LS=080 ZP=OFF SG=OFF KD=OFF IP=OFF
+* MAP2: MAP PROFILES *****************************        200***********
+* .TTAAAMMOO   D I D I N D I D I        ?_)^&:+(                       *
+* 024079        N0NNUCN             X        01 SYSPROF NR             *
+************************************************************************
+INPUT          (     IP=OFF                                           /*
+                                                                       )
+/
+/
+/
+/
+/
+/
+/
+/
+ 029T PAJ-INICIO-MENU.OP1 /*.01U023 A023 .
+      (AD=OD )
+/
+/
+ 029T PAJ-INICIO-MENU.OP2 /*.01U023 A023 .
+      (AD=OD )
+/
+/
+/
+/
+/
+/
+/
+/
+/
+/
+ 003T 'Escoge opción:'
+ 019T PAJ-OPCION /*.99U003 N01.0.
+      (AD=MDTE NL=03.0 )
+ 066T 'PF3 -> Salir'
+/
+ 001T '  ----------------------------------------------------------'-
+      '-----------------'
+/
+ 003T PAJ-ERR /*.01U066 A066 .
+      (AD=OD CD=RE )
+/
+* MAP2: VALIDATION *****************************************************
+* MAP2: END OF MAP *****************************************************
+END

@@ -1,0 +1,24 @@
+DEFINE DATA LOCAL
+/* >Natural Source Header 000000
+/* :Mode S
+/* :CP
+/* <Natural Source Header
+*
+1 PAJ-MENU 
+  2 M-TITLE (A23) INIT <'GESTIÓN DE VEHÍCULOS'>
+  2 OP1 (A23) INIT <'1. CREAR VEHÍCULO'>
+    2 OP1-NOM-ARCH (A8) INIT <'VE-CR'>
+*  
+  2 OP2 (A23) INIT <'2. LEER VEHÍCULO'>
+    2 OP2-NOM-ARCH (A8) INIT <'VE-RE'>
+*  
+  2 OP3 (A23) INIT <'3. MODIFICAR VEHÍCULO'>
+    2 OP3-NOM-ARCH (A8) INIT <'VE-UP'>
+*  
+  2 OP4 (A23) INIT <'4. BORRAR VEHÍCULO'>
+    2 OP4-NOM-ARCH (A8) INIT <'VE-DE'>
+* 
+  2 OP5 (A23) INIT <'5. INFORMES'>
+    2 OP5-NOM-ARCH (A8) INIT <'VE-IN'>
+*
+END-DEFINE

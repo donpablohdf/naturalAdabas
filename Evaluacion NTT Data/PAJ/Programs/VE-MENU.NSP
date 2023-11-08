@@ -1,0 +1,68 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+* *
+* *
+* ** AUTOR: PAJ
+*
+** ** FECHA: 8 nov 2023
+* 
+* 
+************************************************************************
+************************************************************************
+************************GESTIÓN DE VEHÍCULOS****************************
+************************************************************************
+*
+DEFINE DATA 
+LOCAL USING PAJ-V-TX
+LOCAL
+*
+1 PAJ-OPCION   (N1)
+1 PAJ-ERR      (A66)
+*
+END-DEFINE
+*
+RESET PAJ-ERR
+SET KEY PF3 NAMED 'SALIR'
+*
+REPEAT
+*
+  INPUT USING MAP 'M-5-OPS'
+*
+  DECIDE ON FIRST *PF-KEY
+    VALUE 'ENTR'
+      RESET PAJ-ERR
+      PERFORM IR-A-PRG
+    VALUE 'PF3'
+      ESCAPE ROUTINE
+    NONE VALUE
+      IGNORE
+  END-DECIDE
+END-REPEAT
+*
+*********************************
+DEFINE SUBROUTINE IR-A-PRG
+*********************************
+*
+DECIDE ON EVERY VALUE OF PAJ-OPCION                                         
+  VALUE 1                                                           
+     FETCH RETURN PAJ-MENU.OP1-NOM-ARCH                              
+  VALUE 2                                                           
+     FETCH RETURN PAJ-MENU.OP2-NOM-ARCH
+  VALUE 3                                                           
+     FETCH RETURN PAJ-MENU.OP3-NOM-ARCH 
+  VALUE 4                                                           
+     FETCH RETURN PAJ-MENU.OP4-NOM-ARCH 
+  VALUE 5                                                           
+     FETCH RETURN PAJ-MENU.OP5-NOM-ARCH                                                                       
+  NONE VALUE                                                            
+    PAJ-ERR := 'OPCIÓN INTRODUCIDA NO VÁLIDA'
+END-DECIDE
+*
+**************
+END-SUBROUTINE
+**************
+*
+END
