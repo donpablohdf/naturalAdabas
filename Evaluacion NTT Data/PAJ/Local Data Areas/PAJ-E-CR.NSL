@@ -1,0 +1,36 @@
+DEFINE DATA LOCAL
+/* >Natural Source Header 000000
+/* :Mode S
+/* :CP
+/* <Natural Source Header
+*
+1 CR-9-OPS
+  2 M-TITLE (A23) INIT <'NUEVO EMPLEADO'>
+*
+  2 OP1-TXT (A14) INIT <'PERSONNEL-ID'>
+    2 OP1-VAR (A25)
+*  
+  2 OP2-TXT (A14) INIT <'FIRST-NAME'>
+    2 OP2-VAR (A25)
+*  
+  2 OP3-TXT (A14) INIT <'NAME'>
+    2 OP3-VAR (A25)
+*  
+  2 OP4-TXT (A14) INIT <'BIRTH'>
+    2 OP4-VAR (A25)
+* 
+  2 OP5-TXT (A14) INIT <'CITY'>
+    2 OP5-VAR (A25)
+*
+  2 OP6-TXT (A14) INIT <'DEPT'>
+    2 OP6-VAR (A25)
+*  
+  2 OP7-TXT (A14) INIT <'JOB-TITLE'>
+    2 OP7-VAR (A25)
+*  
+  2 OP8-TXT (A14) INIT <'CURR-CODE'>
+    2 OP8-VAR (A25)
+*  
+  2 OP9-TXT (A14) INIT <'SALARY'>
+    2 OP9-VAR (A25)
+END-DEFINE

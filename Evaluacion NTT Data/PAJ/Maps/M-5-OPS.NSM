@@ -27,7 +27,7 @@ INPUT          (     IP=OFF                                           /*
 /
 /
  029T PAJ-MENU.M-TITLE /*.01U023 A023 .
-      (AD=ODZ )
+      (AD=ODZ CD=BL )
 /
 /
  029T PAJ-MENU.OP1 /*.01U023 A023 .
@@ -58,7 +58,7 @@ INPUT          (     IP=OFF                                           /*
  003T 'Escoge opción:'
  019T PAJ-OPCION /*.99U003 N01.0.
       (AD=MDTE NL=03.0 )
- 066T 'PF3 -> Salir'
+ 066T 'PF3 -> Atrás'
 /
  001T '  ----------------------------------------------------------'-
       '-----------------'

@@ -1,0 +1,31 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* Ejemplo lectura escritura archivo
+DEFINE DATA LOCAL
+*
+1 VEHICLES VIEW OF VEHICLES
+*
+  2 MATRICULA          
+  2 BASTIDOR           
+  2 PROPIETARIO-ID     
+  2 MARCA              
+  2 MODELO             
+  2 COLOR              
+  2 ANIO               
+  2 CATEGORIA          
+  2 FECHA-COMPRA       
+*
+END-DEFINE
+*
+DEFINE WORK FILE 1 'vehiculos.csv' TYPE 'csv'
+*
+* WRITE WORK FILE 1 '"MATRICULA";"BASTIDOR ";"PROPIETARIO-ID";"MARCA";"MODELO";"COLOR";"ANIO";"CATEGORIA";"FECHA-COMPRA"'
+READ (5) VEHICLES 
+* Escribe en el archivo                               
+  WRITE WORK FILE 1 VEHICLES
+END-READ
+*
+CLOSE WORK FILE 1
+END
