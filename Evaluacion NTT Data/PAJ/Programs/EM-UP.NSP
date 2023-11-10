@@ -58,7 +58,7 @@ DEFINE SUBROUTINE VALIDACION-UPDATE
 ************************************************************************
 *
 * Convierte PAJ-INPUT-ID a mayúsculas
-
+*
 EXAMINE PAJ-INPUT-ID TRANSLATE INTO UPPER 
 *
 * Quita espacios en blanco PERSONNEL-ID
@@ -88,13 +88,13 @@ FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
 *
   INPUT USING MAP 'CR-9-OPS'
 *
+  MOVE EDITED CR-9-OPS.OP4-VAR TO PAJ-FECHA-D (EM=YYYY-MM-DD)
   MOVE RIGHT CR-9-OPS.OP9-VAR TO CR-9-OPS.OP9-VAR /* Ez Conv A -> N
   MOVE CR-9-OPS.OP9-VAR TO PAJ-VAR-A25
 *
   EMPLOYEES.PERSONNEL-ID          := CR-9-OPS.OP1-VAR
   EMPLOYEES.FIRST-NAME            := CR-9-OPS.OP2-VAR
   EMPLOYEES.NAME                  := CR-9-OPS.OP3-VAR
-  MOVE EDITED CR-9-OPS.OP4-VAR TO PAJ-FECHA-D (EM=YYYY-MM-DD)
   EMPLOYEES.BIRTH                 := PAJ-FECHA-D
   EMPLOYEES.CITY                  := CR-9-OPS.OP5-VAR
   EMPLOYEES.DEPT                  := CR-9-OPS.OP6-VAR
@@ -107,8 +107,9 @@ FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
 *
 END-FIND
 *
-/* Quiero meter un timeout para que a los 5 segundos se borre PAJ-ERR
-PAJ-ERR := 'Usuario modificado' 
+* Hecho
+COMPRESS 'Usuario modificado' PAJ-INPUT-ID 'con éxito' INTO PAJ-ERR
+PAJ-ERR := PAJ-ERR
 *
 **************
 END-SUBROUTINE
