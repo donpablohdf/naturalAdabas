@@ -15,8 +15,7 @@ DEFINE DATA LOCAL
   2 PAJ-SALARY-N9      (N25) /* Para conversion
 *
 1 PAJ-ERR      (A66)
-1 PAJ-MSG-C    (A25) INIT <'Modificado PERSONNEL-ID:'>
-1 PAJ-INPUT-ID (A8)
+1 PAJ-INPUT-ID (A8) INIT <' '>
 *
 1 CR-9-TXT
 *

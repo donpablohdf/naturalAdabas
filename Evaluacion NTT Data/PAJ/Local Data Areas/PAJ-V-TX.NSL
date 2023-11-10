@@ -3,7 +3,7 @@ DEFINE DATA LOCAL
 /* :Mode S
 /* :CP
 /* <Natural Source Header
-*
+*******************************MENU VEHÍCULOS***************************
 1 PAJ-MENU 
   2 M-TITLE (A23) INIT <'GESTIÓN DE VEHÍCULOS'>
   2 OP1 (A23) INIT <'1. CREAR VEHÍCULO'>

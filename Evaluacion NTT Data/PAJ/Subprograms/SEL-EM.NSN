@@ -1,0 +1,119 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*   PROGRAMA CREADO POR EZ                                             *
+*            FECHA      XXXXX                                          *
+*                                                                      *
+*                                                                      *
+*   MODIFICADO POR PAJ                                                 *
+*                                                                      *
+*                                                                      *
+************************************************************************
+*
+DEFINE DATA 
+*
+PARAMETER USING SEL-EMP
+LOCAL
+*
+1 EMPLOYEES VIEW OF EMPLOYEES
+*
+  2 PERSONNEL-ID (A8)
+  2 FIRST-NAME   (A20)
+  2 NAME         (A20)
+*  
+* MAPA ALTA VEHICULO
+*
+1 MREADVDE  /* LEER VEHICULO DETALLE
+*
+  2 M-SEL               (A1/10) 
+  2 M-PERSONNEL-ID      (A8/10) 
+  2 M-FIRST-NAME        (A20/10)
+  2 M-NAME              (A20/10)
+*
+* Variables FOR
+1 W-I   (I4)  /* NO USAR NOMBRES CORTOS TIPO I,W,N
+1 W-J   (I4) 
+*
+* Variables filtro
+1 I-NAME           (A20)
+1 M-FILTRO-NAME    (A20) INIT <'BENNETT'>
+*
+**********
+END-DEFINE /*  AQUI ACABAN LAS DECLARACIONES
+********** 
+*
+* RESET I-ANIO
+*
+SET KEY PF3 NAMED 'SALIR'
+*
+RESET MREADVDE 
+*
+PERFORM RELLENAR-MAPA
+*
+*
+REPEAT
+*
+  INPUT USING MAP 'M-SEL-EM'
+*
+  DECIDE ON FIRST *PF-KEY
+    VALUE 'ENTR'
+*    
+      I-NAME := M-FILTRO-NAME
+      PERFORM RELLENAR-MAPA  
+*      
+      PERFORM LEER-MARCADO               
+*  
+      PERFORM RELLENAR-MAPA 
+*
+    VALUE 'PF3'
+      ESCAPE MODULE
+*
+    NONE VALUE
+      IGNORE
+  END-DECIDE
+END-REPEAT
+*
+*******************************
+DEFINE SUBROUTINE RELLENAR-MAPA
+*******************************
+*
+RESET W-I
+*
+R1. FIND (10) EMPLOYEES WITH NAME = I-NAME SORTED BY NAME
+*
+  ADD 1 TO W-I
+* 
+  MREADVDE.M-PERSONNEL-ID  (W-I)  :=   R1.PERSONNEL-ID
+  MREADVDE.M-FIRST-NAME    (W-I)  :=   R1.FIRST-NAME
+  MREADVDE.M-NAME          (W-I)  :=   R1.NAME
+*
+END-FIND
+*
+**************
+END-SUBROUTINE
+**************
+*
+******************************
+DEFINE SUBROUTINE LEER-MARCADO
+******************************
+*
+*
+FOR W-J 1 TO 10                                                        
+*
+  IF M-SEL(W-J) EQ 'X'    
+    PAJ-INPUT-ID :=   M-PERSONNEL-ID(W-J)
+    ESCAPE MODULE
+  END-IF
+*
+END-FOR   
+*
+RESET M-SEL(*)
+*
+**************
+END-SUBROUTINE
+**************
+*
+END
+*
