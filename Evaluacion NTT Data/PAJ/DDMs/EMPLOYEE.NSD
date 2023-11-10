@@ -15,7 +15,7 @@ T L DB Name                              F Leng  S D Remark
 *      C=COUNTRY                                     
 G 1 AB FULL-NAME                                     
   2 AC FIRST-NAME                        A   20  N   
-  2 AD MIDDLE-I                          A    1  N   
+  2 AD MIDDLE-I                          A   20  N   
   2 AE NAME                              A   20    D 
   1 AD MIDDLE-NAME                       A   20  N   
   1 AF MAR-STAT                          A    1  F   

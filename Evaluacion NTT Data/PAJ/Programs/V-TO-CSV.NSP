@@ -17,11 +17,21 @@ DEFINE DATA LOCAL
   2 CATEGORIA          
   2 FECHA-COMPRA       
 *
+1 CABECERA
+  2 MATRICULA         (A15) INIT <'MATRICULA'>
+  2 BASTIDOR          (A15) INIT <'BASTIDOR'>   
+  2 PROPIETARIO-ID    (A15) INIT <'PROPIETARIO-ID'>
+  2 MARCA             (A15) INIT <'MARCA'>        
+  2 MODELO            (A15) INIT <'MODELO'>      
+  2 COLOR             (A15) INIT <'COLOR'>        
+  2 ANIO              (A15) INIT <'ANIO'>       
+  2 CATEGORIA         (A15) INIT <'CATEGORIA'>    
+  2 FECHA-COMPRA      (A15) INIT <'FECHA-COMPRA'>
 END-DEFINE
 *
 DEFINE WORK FILE 1 'vehiculos.csv' TYPE 'csv'
 *
-* WRITE WORK FILE 1 '"MATRICULA";"BASTIDOR ";"PROPIETARIO-ID";"MARCA";"MODELO";"COLOR";"ANIO";"CATEGORIA";"FECHA-COMPRA"'
+/*WRITE WORK FILE 1 CABECERA
 READ (5) VEHICLES 
 * Escribe en el archivo                               
   WRITE WORK FILE 1 VEHICLES

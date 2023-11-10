@@ -1,0 +1,118 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+* *
+* *
+* ** AUTOR: PAJ
+*
+** ** FECHA: 8 nov 2023
+* 
+************************************************************************
+************************************************************************
+***************************MODIFICAR EMPLEADO***************************
+************************************************************************
+*
+DEFINE DATA 
+*
+LOCAL USING PAJ-E-UP
+*
+LOCAL
+1 EMPLOYEES VIEW OF EMPLOYEES
+  2 PERSONNEL-ID (A8)
+  2 FIRST-NAME (A20)
+  2 NAME (A20)
+  2 BIRTH (D) (EM=YYYY-MM-DD)
+  2 CITY (A20)
+  2 DEPT (A6)
+  2 JOB-TITLE (A25)
+  2 CURR-CODE (1)
+  2 SALARY (1)
+*
+END-DEFINE
+*
+SET KEY PF3 NAMED 'SALIR'
+*
+INPUT 'INGRESE ID USUARIO:' PAJ-INPUT-ID
+*
+REPEAT
+*
+  DECIDE ON FIRST *PF-KEY
+    VALUE 'ENTR'
+*    
+      PERFORM VALIDACION-UPDATE
+*
+    VALUE 'PF3'
+      ESCAPE ROUTINE
+*
+    NONE VALUE
+      IGNORE
+  END-DECIDE
+*
+END-REPEAT
+*
+*
+************************************************************************
+DEFINE SUBROUTINE VALIDACION-UPDATE
+************************************************************************
+*
+* Convierte PAJ-INPUT-ID a mayúsculas
+
+EXAMINE PAJ-INPUT-ID TRANSLATE INTO UPPER 
+*
+* Quita espacios en blanco PERSONNEL-ID
+MOVE *TRIM(PAJ-INPUT-ID) TO PAJ-INPUT-ID
+*
+* Busqueda de PERSONNEL-ID 
+FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
+*
+  IF NO RECORD FOUND /* crea empleado
+*
+    COMPRESS 'PERSONNEL-ID' PAJ-INPUT-ID 'no encontrado'INTO PAJ-ERR
+    PAJ-ERR := PAJ-ERR
+    REINPUT ' '
+*     
+  END-NOREC   
+
+  CR-9-OPS.OP1-VAR   :=  EMPLOYEES.PERSONNEL-ID
+  CR-9-OPS.OP2-VAR   :=  EMPLOYEES.FIRST-NAME
+  CR-9-OPS.OP3-VAR   :=  EMPLOYEES.NAME
+  MOVE EDITED EMPLOYEES.BIRTH (EM=YYYY-MM-DD) TO PAJ-FECHA-A25 
+  CR-9-OPS.OP4-VAR   :=  PAJ-FECHA-A25
+  CR-9-OPS.OP5-VAR   :=  EMPLOYEES.CITY
+  CR-9-OPS.OP6-VAR   :=  EMPLOYEES.DEPT
+  CR-9-OPS.OP7-VAR   :=  EMPLOYEES.JOB-TITLE
+  CR-9-OPS.OP8-VAR   :=  EMPLOYEES.CURR-CODE (1)
+  CR-9-OPS.OP9-VAR   :=  EMPLOYEES.SALARY (1)
+*
+  INPUT USING MAP 'CR-9-OPS'
+*
+  MOVE RIGHT CR-9-OPS.OP9-VAR TO CR-9-OPS.OP9-VAR /* Ez Conv A -> N
+  MOVE CR-9-OPS.OP9-VAR TO PAJ-VAR-A25
+*
+  EMPLOYEES.PERSONNEL-ID          := CR-9-OPS.OP1-VAR
+  EMPLOYEES.FIRST-NAME            := CR-9-OPS.OP2-VAR
+  EMPLOYEES.NAME                  := CR-9-OPS.OP3-VAR
+  MOVE EDITED CR-9-OPS.OP4-VAR TO PAJ-FECHA-D (EM=YYYY-MM-DD)
+  EMPLOYEES.BIRTH                 := PAJ-FECHA-D
+  EMPLOYEES.CITY                  := CR-9-OPS.OP5-VAR
+  EMPLOYEES.DEPT                  := CR-9-OPS.OP6-VAR
+  EMPLOYEES.JOB-TITLE             := CR-9-OPS.OP7-VAR
+  EMPLOYEES.CURR-CODE (1)         := CR-9-OPS.OP8-VAR
+  EMPLOYEES.SALARY (1-1)          := PAJ-SALARY-N9
+*
+  UPDATE
+  END TRANSACTION  
+*
+END-FIND
+*
+/* Quiero meter un timeout para que a los 5 segundos se borre PAJ-ERR
+PAJ-ERR := 'Usuario modificado' 
+*
+**************
+END-SUBROUTINE
+**************
+*
+*
+END

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TEMPLATE date="2023-11-09" environment="" name="emmm" time="13:04:03"
+<TEMPLATE date="2023-11-09" environment="" name="emp" time="23:09:45"
     type="DataBrowser" user="" version="1.0">
     <DEFINITIONS>
         <DESCRIPTION>Report for DDM EMPLOYEES</DESCRIPTION>
         <RECORDLIMIT>0</RECORDLIMIT>
-        <FILTEREDBY>&gt;&gt; Physical Read &lt;&lt;</FILTEREDBY>
+        <FILTEREDBY>*ISN</FILTEREDBY>
         <OPTIONS>
             <USEEDITMASK>None</USEEDITMASK>
             <USEFIELDHEADER>None</USEFIELDHEADER>
@@ -18,22 +18,26 @@
             Length="" Level="1" Name="FULL-NAME" Type="G"/>
         <FIELD Checked="X" Descriptor="" Editmask="" Format="A"
             Header="" Length="20" Level="2" Name="FIRST-NAME" Type=""/>
-        <FIELD Descriptor="" Editmask="" Format="A" Header="" Length="1"
-            Level="2" Name="MIDDLE-I" Type=""/>
+        <FIELD Descriptor="" Editmask="" Format="A" Header=""
+            Length="20" Level="2" Name="MIDDLE-I" Type=""/>
         <FIELD Checked="X" Descriptor="D" Editmask="" Format="A"
-            Header="" Length="20" Level="2" Name="NAME" Type=""/>
+            Header="" Length="20" Level="2" Name="NAME" Type="">
+            <STARTVALUE index="1">a</STARTVALUE>
+            <ENDVALUE index="1">c</ENDVALUE>
+        </FIELD>
         <FIELD Descriptor="" Editmask="" Format="A" Header=""
             Length="20" Level="1" Name="MIDDLE-NAME" Type=""/>
         <FIELD Descriptor="" Editmask="" Format="A"
             Header="MARITAL/STATUS" Length="1" Level="1" Name="MAR-STAT" Type=""/>
         <FIELD Descriptor="" Editmask="" Format="A" Header="S/E/X"
             Length="1" Level="1" Name="SEX" Type=""/>
-        <FIELD Descriptor="D" Editmask="YYYY-MM-DD" Format="D"
-            Header="DATE/OF/BIRTH" Length="6" Level="1" Name="BIRTH" Type=""/>
+        <FIELD Checked="X" Descriptor="D" Editmask="YYYY-MM-DD"
+            Format="D" Header="DATE/OF/BIRTH" Length="6" Level="1"
+            Name="BIRTH" Type=""/>
         <FIELD Descriptor="D" Editmask="" Format="I" Header=""
             Length="2" Level="1" Name="N@BIRTH" Type=""/>
-        <FIELD Descriptor="" Editmask="" Format="" Header="" Length=""
-            Level="1" Name="FULL-ADDRESS" Type="G"/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="" Header=""
+            Length="" Level="1" Name="FULL-ADDRESS" Type="G"/>
         <FIELD Descriptor="" Editmask="" Format="A" Header="ADDRESS"
             Length="20" Level="2" Name="ADDRESS-LINE" Type="M">
             <OCC index="1">
@@ -41,8 +45,8 @@
                 <END>1</END>
             </OCC>
         </FIELD>
-        <FIELD Descriptor="D" Editmask="" Format="A" Header=""
-            Length="20" Level="2" Name="CITY" Type=""/>
+        <FIELD Checked="X" Descriptor="D" Editmask="" Format="A"
+            Header="" Length="20" Level="2" Name="CITY" Type=""/>
         <FIELD Descriptor="" Editmask="" Format="A"
             Header="POSTAL/ADDRESS" Length="10" Level="2" Name="ZIP" Type=""/>
         <FIELD Descriptor="" Editmask="" Format="A"
@@ -56,13 +60,13 @@
             Length="6" Level="2" Name="AREA-CODE" Type=""/>
         <FIELD Descriptor="" Editmask="" Format="A" Header="TELEPHONE"
             Length="15" Level="2" Name="PHONE" Type=""/>
-        <FIELD Descriptor="D" Editmask="" Format="A"
+        <FIELD Checked="X" Descriptor="D" Editmask="" Format="A"
             Header="DEPARTMENT/CODE" Length="6" Level="1" Name="DEPT" Type=""/>
         <FIELD Descriptor="D" Editmask="" Format="A"
             Header="CURRENT/POSITION" Length="25" Level="1"
             Name="JOB-TITLE" Type=""/>
-        <FIELD Descriptor="" Editmask="" Format="" Header="" Length=""
-            Level="1" Name="INCOME" Type="P">
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="" Header=""
+            Length="" Level="1" Name="INCOME" Type="P">
             <OCC index="1">
                 <BEGIN>0</BEGIN>
                 <END>0</END>
@@ -75,7 +79,7 @@
                 <END>1</END>
             </OCC>
         </FIELD>
-        <FIELD Descriptor="" Editmask="" Format="P"
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="P"
             Header="ANNUAL/SALARY" Length="9.0" Level="2" Name="SALARY" Type="">
             <OCC index="1">
                 <BEGIN>1</BEGIN>
@@ -149,6 +153,9 @@
         <FIELD Editmask="" Format="I" Header="" Length="4" Level="1"
             Name=".COUNTER" Type="#"/>
         <FIELD Checked="X" Editmask="" Format="P" Header="" Length="10"
-            Level="1" Name="*ISN" Type="#"/>
+            Level="1" Name="*ISN" Type="#">
+            <STARTVALUE index="1">1115</STARTVALUE>
+            <ENDVALUE index="1">1117</ENDVALUE>
+        </FIELD>
     </GENERALFIELDS>
 </TEMPLATE>

@@ -1,0 +1,43 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+DEFINE DATA LOCAL
+
+1 EMPLOYEES VIEW OF EMPLOYEES
+
+*
+END-DEFINE
+*
+*
+GET EMPLOYEES 1113
+
+DELETE
+                    
+END TRANSACTION
+GET EMPLOYEES 1112
+
+DELETE
+                    
+END TRANSACTION
+GET EMPLOYEES 1111
+
+DELETE
+                    
+END TRANSACTION
+GET EMPLOYEES 1110
+
+DELETE
+                    
+END TRANSACTION
+GET EMPLOYEES 1109
+
+DELETE
+                    
+END TRANSACTION
+GET EMPLOYEES 1108
+
+DELETE
+                    
+END TRANSACTION
+END
