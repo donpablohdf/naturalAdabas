@@ -57,13 +57,6 @@ END-REPEAT
 DEFINE SUBROUTINE VALIDACION-UPDATE
 ************************************************************************
 *
-* Convierte PAJ-INPUT-ID a mayúsculas
-*
-EXAMINE PAJ-INPUT-ID TRANSLATE INTO UPPER 
-*
-* Quita espacios en blanco PERSONNEL-ID
-MOVE *TRIM(PAJ-INPUT-ID) TO PAJ-INPUT-ID
-*
 * Busqueda de PERSONNEL-ID 
 FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
 *

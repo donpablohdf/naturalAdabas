@@ -1,0 +1,88 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+* *
+* *
+* ** AUTOR: PAJ
+*
+** ** FECHA: 8 nov 2023
+* 
+************************************************************************
+************************************************************************
+***************************LEER EMPLEADO********************************
+************************************************************************
+*
+DEFINE DATA 
+*
+LOCAL USING PAJ-E-UP
+*
+LOCAL
+1 EMPLOYEES VIEW OF EMPLOYEES
+  2 PERSONNEL-ID (A8)
+  2 FIRST-NAME   (A20)
+  2 NAME         (A20)
+  2 BIRTH        (D) (EM=YYYY-MM-DD)
+  2 CITY         (A20)
+  2 DEPT         (A6)
+  2 JOB-TITLE    (A25)
+  2 CURR-CODE    (1)
+  2 SALARY       (1)
+*
+1 SALARY-N9-A (N9) (EM=*9)
+1 SALARY-N9 (N9)
+1 REDEFINE SALARY-N9
+  2 SALARY-A9 (A9)
+*
+END-DEFINE
+*
+CALLNAT "SEL-EM" PAJ-INPUT-ID
+*
+PERFORM LEER-EMPLEADO
+*
+************************************************************************
+DEFINE SUBROUTINE LEER-EMPLEADO
+************************************************************************
+*
+* Busqueda de PERSONNEL-ID 
+FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
+*
+  IF NO RECORD FOUND /* Error si no encuentra PERSONNEL-ID 
+*
+    COMPRESS 'PERSONNEL-ID' PAJ-INPUT-ID 'no encontrado'INTO PAJ-ERR
+    REINPUT PAJ-ERR
+*     
+  END-NOREC
+*
+* Si ha encontrado el PERSONNEL-ID
+*
+  RESET PAJ-ERR
+*
+* Lectura de datos
+  MOVE EDITED EMPLOYEES.BIRTH (EM=YYYY-MM-DD) TO PAJ-FECHA-A25
+  /* BUG: quitar los ceros a la izquierda
+  MOVE EMPLOYEES.SALARY (1) TO SALARY-N9
+  MOVE EMPLOYEES.SALARY (1) TO SALARY-N9-A
+
+*
+  WRITE
+    EMPLOYEES.PERSONNEL-ID (AD=I CD=PI) /
+    EMPLOYEES.FIRST-NAME /
+    EMPLOYEES.NAME /
+    PAJ-FECHA-A25 /
+    EMPLOYEES.CITY /
+    EMPLOYEES.DEPT /
+    EMPLOYEES.JOB-TITLE /
+    EMPLOYEES.CURR-CODE (1) /
+    SALARY-A9 /
+    SALARY-N9-A
+*
+END-FIND
+*
+**************
+END-SUBROUTINE
+**************
+*
+*
+END
