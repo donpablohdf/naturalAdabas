@@ -48,9 +48,9 @@ DEFINE SUBROUTINE IR-A-PRG
 *
 DECIDE ON EVERY VALUE OF PAJ-OPCION                                         
   VALUE 1                                                           
-     FETCH RETURN PAJ-INICIO-MENU.OP1-NOM-ARCH                              
+     FETCH RETURN PAJ-INICIO-MENU.OP1-NOM-ARCH /* Menú Empleados                              
   VALUE 2                                                           
-     FETCH RETURN PAJ-INICIO-MENU.OP2-NOM-ARCH                                                                       
+     FETCH RETURN PAJ-INICIO-MENU.OP2-NOM-ARCH /* Menú vehículos                                                                      
   NONE VALUE                                                            
     PAJ-ERR := 'OPCIÓN INTRODUCIDA NO VÁLIDA'
 END-DECIDE

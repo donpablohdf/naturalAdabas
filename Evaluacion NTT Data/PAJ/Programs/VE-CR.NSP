@@ -64,6 +64,7 @@ FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
 * Entrada de datos para create
   INPUT USING MAP 'CR-9-OPS'
 *
+* Conversión de tipos
   MOVE CR-9-OPS.OP7-VAR TO PAJ-VAR-A25-A
   MOVE CR-9-OPS.OP9-VAR TO PAJ-VAR-A25
 *

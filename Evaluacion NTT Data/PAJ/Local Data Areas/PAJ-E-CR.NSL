@@ -6,15 +6,15 @@ DEFINE DATA LOCAL
 ******************************CREAR EMPLEADO****************************
 **
 *
-1 PAJ-FECHA (D) (EM=YYYY-MM-DD) /* Para conversion
+1 PAJ-FECHA            (D) (EM=YYYY-MM-DD) /* Para conversion
 *
 1 PAJ-VAR-A25          (A25)/* Para conversion
 1 REDEFINE PAJ-VAR-A25
   2 PAJ-SALARY-N9      (N25) /* Para conversion
 *
-1 PAJ-ERR (A66) /*
-1 PAJ-MSG-C (A25) INIT <'Creado con PERSONNEL-ID:'>
-1 PAJ-INPUT-ID (A8) /* Tratamiendo de PERSONNEL-ID
+1 PAJ-ERR              (A66) /*
+1 PAJ-MSG-C            (A25) INIT <'Creado con PERSONNEL-ID:'>
+1 PAJ-INPUT-ID         (A8) /* Tratamiendo de PERSONNEL-ID
 *
 1 CR-9-TXT
 *

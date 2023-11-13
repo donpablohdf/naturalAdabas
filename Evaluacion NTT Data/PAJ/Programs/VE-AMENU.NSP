@@ -17,11 +17,7 @@
 *
 DEFINE DATA 
 LOCAL USING PAJ-V-TX
-LOCAL
-*
-1 PAJ-OPCION   (N1)
-1 PAJ-ERR      (A66)
-*
+
 END-DEFINE
 *
 RESET PAJ-ERR
@@ -40,6 +36,7 @@ REPEAT
     NONE VALUE
       IGNORE
   END-DECIDE
+*
 END-REPEAT
 *
 *********************************

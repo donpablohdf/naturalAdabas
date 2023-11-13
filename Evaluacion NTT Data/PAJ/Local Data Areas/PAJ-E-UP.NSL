@@ -6,14 +6,15 @@ DEFINE DATA LOCAL
 *****************************MODIFICAR EMPLEADO*************************
 **
 *
-1 PAJ-FECHA-A25  (A25) /* Para conversion
-1 PAJ-FECHA-D (D) /* Para conversion
-1 PAJ-SALARY (N9) /* Para conversion
+1 PAJ-FECHA-A25         (A25) /* Para conversion
+1 PAJ-FECHA-D           (D) /* Para conversion
+1 PAJ-SALARY            (N9) /* Para conversion
 *
-1 PAJ-VAR-A25          (A25)/* Para conversion
+1 PAJ-VAR-A25           (A25)/* Para conversion
 1 REDEFINE PAJ-VAR-A25
-  2 PAJ-SALARY-N9      (N25) /* Para conversion
+  2 PAJ-SALARY-N9       (N25) /* Para conversion
 *
+* Variables de control
 1 PAJ-ERR      (A66)
 1 PAJ-INPUT-ID (A8) INIT <' '>
 *

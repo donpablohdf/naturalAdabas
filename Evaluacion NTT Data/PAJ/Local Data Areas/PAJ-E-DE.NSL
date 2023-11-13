@@ -13,22 +13,21 @@ DEFINE DATA LOCAL
 * Opciones para mapa M-5-OPS
 1 PAJ-MENU
 *
-  2 M-TITLE (A23) INIT <'BORRAR EMPLEADO'>
+  2 M-TITLE       (A23) INIT <'BORRAR EMPLEADO'>
 *
-  2 OP1 (A23) INIT <'1. Y SUS VEHICULOS'>
+  2 OP1            (A23) INIT <'1. Y SUS VEHICULOS'>
     2 OP1-NOM-ARCH (A8) INIT <'DE-VE'>
 *  
-  2 OP2 (A23) INIT <'2. SOLO EMPLEADO'>
+  2 OP2            (A23) INIT <'2. SOLO EMPLEADO'>
     2 OP2-NOM-ARCH (A8) INIT <'DE-SO'>
 *  
-  2 OP3 (A23) INIT <'3. ANTES VER VEHICULOS'>
+  2 OP3            (A23) INIT <'3. ANTES VER VEHICULOS'>
     2 OP3-NOM-ARCH (A8) INIT <'VE-RE'>
 *  
-  2 OP4 (A23) INIT <' '>
+  2 OP4            (A23) INIT <' '>
     2 OP4-NOM-ARCH (A8) INIT <' '>
 * 
-  2 OP5 (A23) INIT <' '>
+  2 OP5            (A23) INIT <' '>
     2 OP5-NOM-ARCH (A8) INIT <' '>
-*
 *
 END-DEFINE
