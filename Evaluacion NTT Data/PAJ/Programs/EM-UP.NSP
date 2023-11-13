@@ -32,26 +32,11 @@ LOCAL
 *
 END-DEFINE
 *
+* Llamada al subprograma para elegir PERSONNEL-ID de trabajo
+*
 CALLNAT "SEL-EM" PAJ-INPUT-ID
 *
-SET KEY PF3 NAMED 'SALIR'
-*
-REPEAT
-*
-  DECIDE ON FIRST *PF-KEY
-    VALUE 'ENTR'
-*    
-      PERFORM VALIDACION-UPDATE
-*
-    VALUE 'PF3'
-      ESCAPE MODULE
-*
-    NONE VALUE
-      IGNORE
-  END-DECIDE
-*
-END-REPEAT
-*
+PERFORM VALIDACION-UPDATE
 *
 ************************************************************************
 DEFINE SUBROUTINE VALIDACION-UPDATE

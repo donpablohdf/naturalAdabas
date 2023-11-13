@@ -4,6 +4,7 @@ DEFINE DATA LOCAL
 /* :CP
 /* <Natural Source Header
 *******************MENU EMPLEADOS**************************************
+* Opciones para mapa M-5-OPS
 1 PAJ-MENU 
   2 M-TITLE (A23) INIT <'GESTIÓN DE EMPLEADOS'>
   2 OP1 (A23) INIT <'1. CREAR EMPLEADO'>

@@ -1,0 +1,143 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+* *
+* *
+* ** AUTOR: PAJ
+*
+** ** FECHA: 10 nov 2023
+* 
+************************************************************************
+************************************************************************
+*******************BORRAR EMPLEADO y sus vehículos**********************
+************************************************************************
+*
+DEFINE DATA 
+*
+PARAMETER USING SEL-EMP
+LOCAL
+*
+1 EMPLOYEES VIEW OF EMPLOYEES
+*
+  2 PERSONNEL-ID (A8)
+  2 FIRST-NAME   (A20)
+  2 NAME         (A20)
+*
+1 VEHICLES VIEW OF VEHICLES
+*
+  2 MATRICULA      (A15)
+  2 PROPIETARIO-ID (A8) 
+  2 MARCA          (A20)
+  2 MODELO         (A20)
+*
+1 PAJ-ACEPTAR (A1) /* aceptar ocpiones
+*
+1 PAJ-EMP-ISN (N10) /* almacena ISN de usuario
+*
+1 W-J (I4) 
+*
+1 M-DE-VE  
+*
+  2 M-ISN-VEH      (N10/10) /* ISNs vehículos
+  2 M-MATRICULA    (A15/10) 
+  2 M-MARCA        (A20/10)
+  2 M-MODELO       (A20/10)
+1 PAJ-ERR (A66)
+*
+1 #OP2 (N4)
+END-DEFINE 
+*
+FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
+*
+  PAJ-EMP-ISN := *ISN
+*
+  FIND VEHICLES WITH  PROPIETARIO-ID = PAJ-INPUT-ID SORTED BY MATRICULA
+*
+    IF NO RECORDS FOUND /* Si no tiene vehículos
+*
+      INPUT 'El empleado no tiene vehículos. ¿Desea borrarlo? S/N' 
+        PAJ-ACEPTAR
+      EXAMINE PAJ-ACEPTAR TRANSLATE INTO UPPER
+      PERFORM BORRA-SIN
+*
+    END-NOREC
+*
+* Si el usuario tiene vehiculos rellenamos el mapa
+*
+    ADD 1 TO W-J
+* 
+    M-DE-VE.M-ISN-VEH    (W-J)  :=   *ISN
+    M-DE-VE.M-MATRICULA  (W-J)  :=   VEHICLES.MATRICULA
+    M-DE-VE.M-MARCA      (W-J)  :=   VEHICLES.MARCA
+    M-DE-VE.M-MODELO     (W-J)  :=   VEHICLES.MODELO
+*
+    PERFORM BORRA-CON
+*
+  END-FIND /* fin búsqueda vehículos
+*
+END-FIND /* fin búsqueda empleado
+*
+***********************************************************************
+DEFINE SUBROUTINE BORRA-SIN
+***********************************************************************
+**
+*
+* Borrar sin no tiene vehiculos
+DECIDE ON FIRST VALUE PAJ-ACEPTAR
+*
+  VALUE 'S'
+    GET EMPLOYEES PAJ-EMP-ISN
+    DELETE
+    END TRANSACTION
+    ESCAPE MODULE
+*
+  VALUE 'N'
+    ESCAPE MODULE
+*
+  NONE VALUE
+    ESCAPE MODULE
+*
+END-DECIDE
+*
+************************************************************************
+END-SUBROUTINE
+************************************************************************
+*
+*
+***********************************************************************
+DEFINE SUBROUTINE BORRA-CON
+***********************************************************************
+**
+*
+* Opciones si tiene vehículos
+RESET W-J
+RESET PAJ-ACEPTAR
+*
+INPUT USING MAP 'M-DE-VE'
+*
+DECIDE ON FIRST VALUE PAJ-ACEPTAR
+*
+  VALUE '1'
+    WRITE PAJ-EMP-ISN
+*     #OP2 := *LENGTH(M-DE-VE.M-ISN-VEH)
+*     WRITE #OP2
+    WRITE M-DE-VE.M-ISN-VEH (*)
+  VALUE '2'
+    WRITE 'transfiere'
+  NONE VALUE
+    PAJ-ERR := 'Opción no válida'
+    REINPUT 'Opción no válida'
+    /*ESCAPE ROUTINE
+*
+END-DECIDE
+*  
+************************************************************************
+END-SUBROUTINE
+************************************************************************
+*
+END
+*
+*
+*

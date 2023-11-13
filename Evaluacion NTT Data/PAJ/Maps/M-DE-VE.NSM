@@ -1,0 +1,127 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* MAP2: PROTOTYPE VERSION 820 --- CREATED BY ONE 9.3.1 ---
+* INPUT USING MAP 'XXXXXXXX'
+*     EMPLOYEES.NAME M-MARCA(*) M-MATRICULA(*) M-MODELO(*) PAJ-ACEPTAR PAJ-ERR
+DEFINE DATA PARAMETER
+1 EMPLOYEES.NAME (A020)
+1 M-MARCA (A020/00001:00010)
+1 M-MATRICULA (A015/00001:00010)
+1 M-MODELO (A020/00001:00010)
+1 PAJ-ACEPTAR (A001)
+1 PAJ-ERR (A066)
+END-DEFINE
+FORMAT PS=024 LS=080 ZP=OFF SG=OFF KD=OFF IP=OFF
+* MAP2: MAP PROFILES *****************************        200***********
+* .TTAAAMMOO   D I D I N D I D I        ?_)^&:+(                       *
+* 024079        N0NNUCN             X        01 SYSPROF NR             *
+************************************************************************
+INPUT          (     IP=OFF                                           /*
+                                                                       )
+/
+ 019T 'Vehículos de'
+ 033T EMPLOYEES.NAME /*.01U020 A020 .
+      (AD=OD )
+/
+ 003T '-' (075)
+/
+/
+ 019T 'Matrícula'
+ 029T 'Marca'
+ 050T 'Modelo'
+/
+ 013T M-MATRICULA (1) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+   /**A1000100000100001000010000100001100010001001000001000HV
+ 029T M-MARCA (1) /*.01U020 A020 .
+      (AD=ODL )
+   /**A1000100000100001000010000100001100010001001000001000HV
+ 050T M-MODELO (1) /*.01U020 A020 .
+      (AD=ODL )
+   /**A1000100000100001000010000100001100010001001000001000HV
+/
+ 013T M-MATRICULA (2) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T M-MARCA (2) /*.01U020 A020 .
+      (AD=ODL )
+ 050T M-MODELO (2) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 013T M-MATRICULA (3) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T M-MARCA (3) /*.01U020 A020 .
+      (AD=ODL )
+ 050T M-MODELO (3) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 013T M-MATRICULA (4) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T M-MARCA (4) /*.01U020 A020 .
+      (AD=ODL )
+ 050T M-MODELO (4) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 013T M-MATRICULA (5) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T M-MARCA (5) /*.01U020 A020 .
+      (AD=ODL )
+ 050T M-MODELO (5) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 013T M-MATRICULA (6) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T M-MARCA (6) /*.01U020 A020 .
+      (AD=ODL )
+ 050T M-MODELO (6) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 013T M-MATRICULA (7) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T M-MARCA (7) /*.01U020 A020 .
+      (AD=ODL )
+ 050T M-MODELO (7) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 013T M-MATRICULA (8) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T M-MARCA (8) /*.01U020 A020 .
+      (AD=ODL )
+ 050T M-MODELO (8) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 013T M-MATRICULA (9) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T M-MARCA (9) /*.01U020 A020 .
+      (AD=ODL )
+ 050T M-MODELO (9) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 013T M-MATRICULA (10) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T M-MARCA (10) /*.01U020 A020 .
+      (AD=ODL )
+ 050T M-MODELO (10) /*.01U020 A020 .
+      (AD=ODL )
+/
+/
+ 013T '1. Confirma borrar con vehículos'
+/
+ 013T '2. Transferir vehículos a otro empleado'
+/
+/
+ 016T 'Elija opción:'
+ 031T PAJ-ACEPTAR /*.99U001 A001 .
+      (AD=MDT )
+/
+ 067T 'PF3<SALIR>'
+/
+ 003T '-' (075)
+/
+ 008T PAJ-ERR /*.01U066 A066 .
+      (AD=OD CD=RE )
+/
+* MAP2: VALIDATION *****************************************************
+* MAP2: END OF MAP *****************************************************
+END

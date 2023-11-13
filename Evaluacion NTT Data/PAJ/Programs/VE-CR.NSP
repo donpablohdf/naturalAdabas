@@ -7,27 +7,89 @@
 * *
 * ** AUTOR: PAJ
 *
-** ** FECHA: 9 nov 2023
+** ** FECHA: 8 nov 2023
 * 
-* 
 ************************************************************************
 ************************************************************************
-************************************************************************
+***************************CREAR VEHICULO*******************************
 ************************************************************************
 *
-DEFINE DATA LOCAL
+DEFINE DATA 
+*
+LOCAL USING PAJ-V-CR
+*
+LOCAL
+1 EMPLOYEES VIEW OF EMPLOYEES
+*
+  2 PERSONNEL-ID (A8)
 *
 1 VEHICLES VIEW OF VEHICLES
+*
+  2 PROPIETARIO-ID (A8) /* NC
   2 MATRICULA (A15)
   2 BASTIDOR (B4)
-  2 PROPIETARIO-ID (A8) /* NC
   2 MARCA (A20)
   2 MODELO (A20)
   2 COLOR (A10)
-  2 ANIO (N4.0)
+  2 ANIO (N4)
   2 CATEGORIA (A1)
-  2 FECHA-COMPRA (N8.0)
+  2 FECHA-COMPRA (N8)
 *
 END-DEFINE
+*
+* Llamada al subprograma para elegir PERSONNEL-ID de trabajo
+*
+CALLNAT "SEL-EM" PAJ-INPUT-ID
+*
+PERFORM VALIDACION-CREATE
+*
+************************************************************************
+DEFINE SUBROUTINE VALIDACION-CREATE
+************************************************************************
+*
+* Busqueda de PERSONNEL-ID 
+FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
+*
+  IF NO RECORD FOUND /* Error si no encuentra PERSONNEL-ID 
+*
+    COMPRESS 'PROPIETARIO-ID' PAJ-INPUT-ID 'no encontrado'INTO PAJ-ERR
+    REINPUT PAJ-ERR
+*     
+  END-NOREC
+*
+* Si ha encontrado el PERSONNEL-ID
+*
+  RESET PAJ-ERR
+  CR-9-OPS.OP1-VAR := PAJ-INPUT-ID
+* Entrada de datos para create
+  INPUT USING MAP 'CR-9-OPS'
+*
+  MOVE CR-9-OPS.OP7-VAR TO PAJ-VAR-A25-A
+  MOVE CR-9-OPS.OP9-VAR TO PAJ-VAR-A25
+*
+  VEHICLES.PROPIETARIO-ID   := CR-9-OPS.OP1-VAR
+  VEHICLES.MATRICULA        := CR-9-OPS.OP2-VAR
+  VEHICLES.BASTIDOR         := CR-9-OPS.OP3-VAR
+  VEHICLES.MARCA            := CR-9-OPS.OP4-VAR
+  VEHICLES.MODELO           := CR-9-OPS.OP5-VAR
+  VEHICLES.COLOR            := CR-9-OPS.OP6-VAR
+  VEHICLES.ANIO             := PAJ-VAR-N25-A
+  VEHICLES.CATEGORIA        := CR-9-OPS.OP8-VAR
+  VEHICLES.FECHA-COMPRA     := PAJ-VAR-N9
+*
+  STORE VEHICLES
+  END TRANSACTION  
+*
+END-FIND
+*
+* Hecho
+COMPRESS 'Vehículo matrícula ' CR-9-OPS.OP1-VAR ' creado con éxito' 
+  INTO PAJ-ERR
+PAJ-ERR := PAJ-ERR
+*
+**************
+END-SUBROUTINE
+**************
+*
 *
 END

@@ -1,0 +1,21 @@
+DEFINE DATA LOCAL
+/* >Natural Source Header 000000
+/* :Mode S
+/* :CP
+/* <Natural Source Header
+*****************************LEER EMPLEADO******************************
+**
+*
+1 PAJ-FECHA-A25  (A25) /* Para conversion
+1 PAJ-FECHA-D (D) /* Para conversion
+1 PAJ-SALARY (N9) /* Para conversion
+*
+1 SALARY-N9-A (N9) (EM=*9)
+1 SALARY-N9 (N9)
+1 REDEFINE SALARY-N9
+  2 SALARY-A9 (A9)
+*
+1 PAJ-INPUT-ID (A8) INIT <' '>
+1 PAJ-ERR (A66)
+*
+END-DEFINE

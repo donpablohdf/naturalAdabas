@@ -38,7 +38,7 @@ LOCAL
 *
 * Variables filtro
 1 I-NAME           (A20)
-1 M-FILTRO-NAME    (A20) INIT <'BENNETT'>
+1 M-FILTRO-NAME    (A20) 
 *
 **********
 END-DEFINE /*  AQUI ACABAN LAS DECLARACIONES

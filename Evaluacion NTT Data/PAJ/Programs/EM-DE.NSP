@@ -11,36 +11,27 @@
 * 
 ************************************************************************
 ************************************************************************
-***************************LEER EMPLEADO********************************
+***************************BORRAR EMPLEADO******************************
 ************************************************************************
 *
 DEFINE DATA 
 *
-LOCAL USING PAJ-E-RE
+LOCAL USING PAJ-E-DE
 *
 LOCAL
 1 EMPLOYEES VIEW OF EMPLOYEES
   2 PERSONNEL-ID (A8)
-  2 FIRST-NAME   (A20)
-  2 NAME         (A20)
-  2 BIRTH        (D) (EM=YYYY-MM-DD)
-  2 CITY         (A20)
-  2 DEPT         (A6)
-  2 JOB-TITLE    (A25)
-  2 CURR-CODE    (1)
-  2 SALARY       (1)
 *
-
 END-DEFINE
 *
 * Llamada al subprograma para elegir PERSONNEL-ID de trabajo
 *
 CALLNAT "SEL-EM" PAJ-INPUT-ID
 *
-PERFORM LEER-EMPLEADO
+PERFORM BORRAR-EMPLEADO
 *
 ************************************************************************
-DEFINE SUBROUTINE LEER-EMPLEADO
+DEFINE SUBROUTINE BORRAR-EMPLEADO
 ************************************************************************
 *
 * Busqueda de PERSONNEL-ID 
@@ -55,25 +46,27 @@ FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
 *
 * Si ha encontrado el PERSONNEL-ID
 *
+  RESET PAJ-ERR
+* *
+*   WRITE EMPLOYEES.PERSONNEL-ID (AD=I CD=PI) / *ISN
 *
-* Lectura de datos
-  MOVE EDITED EMPLOYEES.BIRTH (EM=YYYY-MM-DD) TO PAJ-FECHA-A25
-  /* BUG: quitar los ceros a la izquierda
-  MOVE EMPLOYEES.SALARY (1) TO SALARY-N9
-  MOVE EMPLOYEES.SALARY (1) TO SALARY-N9-A
-
+* Cargar mapa de opciones
+  INPUT USING MAP 'M-5-OPS'
 *
-  WRITE
-    EMPLOYEES.PERSONNEL-ID (AD=I CD=PI) /
-    EMPLOYEES.FIRST-NAME /
-    EMPLOYEES.NAME /
-    PAJ-FECHA-A25 /
-    EMPLOYEES.CITY /
-    EMPLOYEES.DEPT /
-    EMPLOYEES.JOB-TITLE /
-    EMPLOYEES.CURR-CODE (1) /
-    SALARY-A9 /
-    SALARY-N9-A
+  DECIDE ON EVERY VALUE OF PAJ-OPCION
+    VALUE 1 /* borrar sus vehiculos
+      CALLNAT PAJ-MENU.OP1-NOM-ARCH PAJ-INPUT-ID
+    VALUE 2 /* solo el empleado
+      CALLNAT  PAJ-MENU.OP2-NOM-ARCH PAJ-INPUT-ID
+    VALUE 3 /* Ver vehiculos
+      FETCH RETURN PAJ-MENU.OP3-NOM-ARCH PAJ-INPUT-ID
+*   VALUE 4                                                           
+*      FETCH RETURN PAJ-MENU.OP4-NOM-ARCH 
+*   VALUE 5                                                           
+*      FETCH RETURN PAJ-MENU.OP5-NOM-ARCH                                                                       
+    NONE VALUE
+      PAJ-ERR := 'OPCIÓN INTRODUCIDA NO VÁLIDA'
+  END-DECIDE
 *
 END-FIND
 *
