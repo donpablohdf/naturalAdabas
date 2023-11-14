@@ -31,6 +31,9 @@ LOCAL
   2 CURR-CODE     (1)
   2 SALARY        (1)
 *
+1 EMP VIEW OF EMP
+  2 AA-1 (A8) /* NC NN
+
 END-DEFINE
 *
 * Valores por defecto
@@ -76,8 +79,12 @@ FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
       EMPLOYEES.JOB-TITLE         := CR-9-OPS.OP7-VAR
       EMPLOYEES.CURR-CODE (1)     := CR-9-OPS.OP8-VAR
       EMPLOYEES.SALARY    (1-1)   := PAJ-SALARY-N9
-*                              
+*      
+      EMP.AA-1 :=   CR-9-OPS.OP1-VAR /* Solución a la integridad referencial
+*
       STORE EMPLOYEES
+      STORE EMP
+
 *   
     ELSE
 *
