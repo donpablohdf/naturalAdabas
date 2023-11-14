@@ -1,0 +1,26 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+***********************************************************
+***********************************************************
+***   PROGRAMA CREADO POR Pablo Alegre                  ***
+*     TIME                         FECHA                  *
+***   11:00                        14/11/2023           ***
+***                                                       *
+***  Llama a subprograma edita un empleado              ***
+*********************************************************** 
+*********************************************************** 
+DEFINE DATA 
+LOCAL
+*  
+1 W-ISN     (P10)
+*  
+END-DEFINE 
+*
+INPUT 'Ingrese ISN: ' W-ISN
+*
+* Llamada a subprograma con su parámetro
+CALLNAT 'EMPLEASU' W-ISN
+*
+END

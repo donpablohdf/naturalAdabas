@@ -3,21 +3,9 @@ DEFINE DATA LOCAL
 /* :Mode S
 /* :CP
 /* <Natural Source Header
-*****************************MODIFICAR EMPLEADO*************************
+*****************************CREAR VEHICULO*****************************
 **
-*
-1 PAJ-VAR-A25-A          (A25)/* Para conversion
-1 REDEFINE PAJ-VAR-A25-A
-  2 PAJ-VAR-N25-A        (N4.0) /* Para conversion
-*
-1 PAJ-VAR-A25            (A25)/* Para conversion
-1 REDEFINE PAJ-VAR-A25
-  2 PAJ-VAR-N9          (N8.0) /* Para conversion
-*
-* Variables de control
-1 PAJ-ERR      (A66)
-1 PAJ-INPUT-ID (A8) INIT <' '>
-*
+* Variables del mapa
 1 CR-9-TXT
 *
   2 M-TITLE (A23) INIT <'CREA VEHICULO'>
@@ -42,5 +30,24 @@ DEFINE DATA LOCAL
   2 OP7-VAR (A25)
   2 OP8-VAR (A25)
   2 OP9-VAR (A25)
+*
+*
+* Para conversion de tipos
+1 PAJ-VAR-A25-A          (A25)
+1 REDEFINE PAJ-VAR-A25-A
+  2 PAJ-VAR-N25-A        (N4.0)
+*
+1 PAJ-VAR-A25            (A25)
+1 REDEFINE PAJ-VAR-A25
+  2 PAJ-VAR-N9           (N8.0)
+*
+* Conversión a binario
+* 1 PAJ-BAS-A25            (A25)
+* 1 REDEFINE PAJ-BAS-A25
+*   2 PAJ-BAS-B            (B4)
+*
+* Variables de control
+1 PAJ-ERR                (A66)
+1 PAJ-INPUT-ID           (A8) INIT <' '>
 *
 END-DEFINE

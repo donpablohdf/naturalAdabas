@@ -1,0 +1,61 @@
+Mi empleado creado es el 3
+
+ ISN = 1114
+ PERSONNEL-ID = 3
+ FIRST-NAME   = ALEGRE	
+ NAME         = PABLO
+ CITY         = LEON
+ SALARY       = 3000
+ 
+PREGUNTAS
+
+- Buscar la descripción larga de algún error (cada uno la que quiera)
+
+	NAT3065: Internal error. DB/FNR :1:/:2:.
+	
+	An internal error has occurred: the Adabas nucleus has detected an
+	error in space calculation.
+
+
+- Explicar configuración mínima de Natural One
+
+	1.- Descargar los contenedores docker:
+	
+	a.- docker pull softwareag/adabas-ce:7.2.0
+	b.- docker pull softwareag/natural-ce:9.3.1
+	
+	2.- Obtener la IP, yo uso 127.0.0.1
+	
+	3.- Ejecutar los contenedores
+	
+	a.- docker run -d -p 60001:60001 -p 8190:8190 -e ACCEPT_EULA=Y -e ADADBID=12 -e "ADA_DB_CREATION=demodb" --name adabas-db softwareag/adabas-ce:7.2.0
+	b.- docker run -d -p 2700:2700 --add-host adabas-db:127.0.0.1 -e ACCEPT_EULA=Y --name natural-ce softwareag/natural-ce:9.3.1
+	
+	4.- Descargar NaturalOne y descomprimirlo
+	
+	5.- Arrancar NaturalONE y elegir la vista de Natural
+	
+- ¿Hay un orden determinado para compilar los módulos? -Explica tu respuesta.
+
+	Si, el propio NaturaONE ya tiene un orden de compilación para que todo funcione
+		
+  ¿en qué orden se compilan?
+  
+  	El orden se puede ver en Preferences -> SoftwareAG -> Natural -> Build Sequence
+  
+- Con tus palabras como describirías un superdescriptor.
+
+	Es un campo que une otros campos para poder buscar por ellos.
+ 
+- ¿podemos modificar un ISN? 
+	
+	No
+ 
+- Para qué sirve el SHEBANG de de arhchivo de linux. 
+
+	Para que el sistema reconozca el tipo de programa que necesita para ejecutar un script
+ 
+- ¿qué es un proceso batch?
+
+	Es un proceso por el que el ordenador completa un conjunto de instrucciones por lotes
+ 

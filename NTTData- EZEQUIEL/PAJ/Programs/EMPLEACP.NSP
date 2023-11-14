@@ -1,0 +1,109 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+***********************************************************
+***********************************************************
+***   PROGRAMA CREADO POR Pablo Alegre                  ***
+*     TIME                         FECHA                  *
+***   9:20                        14/11/2023            ***
+***                                                       *
+***  Este programa crea un empleado                     ***
+*********************************************************** 
+*********************************************************** 
+DEFINE DATA 
+*
+LOCAL
+*
+1 EMPLEADOS VIEW OF EMPLOYEES
+*
+  2 PERSONNEL-ID                 /* (A8) 
+  2 FIRST-NAME                   /* (A20)
+  2 NAME                         /* (A20)
+  2 CITY                         /* (A20)
+  2 SALARY                  (1)  /* N9
+
+*
+1 EMPLEACM /* Variables del mapa
+*            
+  2 PERSONNEL-ID   (A8)
+  2 FIRST-NAME     (A20)
+  2 NAME           (A20)
+  2 CITY           (A20)
+  2 SALARY         (N9)
+  2 TITULO-MAPA    (A50) INIT <'CREAR EMPLEADO'>
+*
+1 PAJ-ERR (A66)
+1 PAJ-INPUT-ID (A8)
+*
+END-DEFINE
+*
+PERFORM VALIDACION-STORE
+*
+************************************************************************
+DEFINE SUBROUTINE VALIDACION-STORE
+************************************************************************
+*
+INPUT USING MAP 'EMPLEACM'
+*
+PAJ-INPUT-ID := EMPLEACM.PERSONNEL-ID
+*
+* Convierte PERSONNEL-ID a mayúsculas
+EXAMINE PAJ-INPUT-ID TRANSLATE INTO UPPER 
+*
+* Quita espacios en blanco PERSONNEL-ID
+MOVE *TRIM(PAJ-INPUT-ID) TO PAJ-INPUT-ID
+*
+* Busqueda de PERSONNEL-ID 
+FIND EMPLEADOS WITH PERSONNEL-ID = PAJ-INPUT-ID
+*
+  IF NO RECORD FOUND /* si PERSONNEL-ID no existe crea empleado
+*
+* VALIDAR SI ALGÚN CAMPO ESTÁ VACÍO
+    IF
+*
+        EMPLEACM.PERSONNEL-ID = ' ' OR
+        EMPLEACM.FIRST-NAME   = ' ' OR
+        EMPLEACM.NAME         = ' ' OR
+        EMPLEACM.CITY         = ' ' OR
+        EMPLEACM.SALARY       = 0
+      REINPUT 'Algún campo está vacío'
+*      
+    ELSE /* Si pasa la validación
+*          
+      EMPLEADOS.PERSONNEL-ID    :=  EMPLEACM.PERSONNEL-ID
+      EMPLEADOS.FIRST-NAME      :=  EMPLEACM.FIRST-NAME
+      EMPLEADOS.NAME            :=  EMPLEACM.NAME
+      EMPLEADOS.CITY            :=  EMPLEACM.CITY
+      EMPLEADOS.SALARY (1)      :=  EMPLEACM.SALARY
+*                              
+      STORE EMPLEADOS
+      END TRANSACTION
+*
+      COMPRESS 'Usuario con PERSONNEL-ID :'
+        PAJ-INPUT-ID 'creado con éxito'
+        INTO PAJ-ERR
+*        
+      WRITE PAJ-ERR
+*
+      ESCAPE ROUTINE
+* 
+    END-IF /* fin validación
+*
+  END-NOREC
+*
+* Mensaje de error si existe ya PERSONNEL-ID
+  COMPRESS 'El PERSONNEL-ID :' PAJ-INPUT-ID 'ya existe. Escriba otro'
+    INTO PAJ-ERR
+  REINPUT PAJ-ERR
+*
+END-FIND
+*
+**************
+END-SUBROUTINE
+**************
+*
+*
+END
+*
+*

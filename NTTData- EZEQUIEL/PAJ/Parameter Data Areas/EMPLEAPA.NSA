@@ -1,0 +1,8 @@
+DEFINE DATA PARAMETER
+/* >Natural Source Header 000000
+/* :Mode S
+/* :CP
+/* <Natural Source Header
+************************ pasa parametro a EMPLEASU
+1 W-ISN (P10)
+END-DEFINE

@@ -1,0 +1,121 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+***********************************************************
+***********************************************************
+***   SUBPROGRAMA CREADO POR Pablo Alegre               ***
+*     TIME                         FECHA                  *
+***   11:00                        14/11/2023           ***
+***                                                       *
+***  Este subprograma edita un empleado                 ***
+*********************************************************** 
+*********************************************************** 
+DEFINE DATA PARAMETER USING EMPLEAPA
+*
+LOCAL
+*
+1 EMPLEADOS VIEW OF EMPLOYEES
+*
+  2 PERSONNEL-ID                 /* (A8) 
+  2 FIRST-NAME                   /* (A20)
+  2 NAME                         /* (A20)
+  2 CITY                         /* (A20)
+  2 SALARY                  (1)  /* N9
+
+*
+1 EMPLEACM /* Variables del mapa
+*            
+  2 PERSONNEL-ID   (A8)
+  2 FIRST-NAME     (A20)
+  2 NAME           (A20)
+  2 CITY           (A20)
+  2 SALARY         (N9)
+  2 TITULO-MAPA    (A50) INIT <'MODIFICAR EMPLEADO'>
+*
+1 PAJ-ERR (A66)
+1 PAJ-INPUT-ID (A8)
+*
+END-DEFINE
+*
+READ EMPLEADOS BY ISN STARTING FROM W-ISN /* busco el empleado
+*
+  DECIDE ON FIRST VALUE *ISN
+    VALUE  W-ISN
+      PAJ-INPUT-ID := EMPLEADOS.PERSONNEL-ID
+      ESCAPE BOTTOM
+    NONE VALUE
+      WRITE 'Error'
+      ESCAPE MODULE
+  END-DECIDE
+*
+END-READ
+*
+PERFORM VALIDACION-UPDATE
+*
+************************************************************************
+DEFINE SUBROUTINE VALIDACION-UPDATE
+************************************************************************
+*
+* Busqueda de PERSONNEL-ID 
+FIND EMPLEADOS WITH PERSONNEL-ID = PAJ-INPUT-ID
+*
+  IF NO RECORD FOUND /* si PERSONNEL-ID error
+*
+* Mensaje de error si existe ya PERSONNEL-ID
+    COMPRESS 'El PERSONNEL-ID :' PAJ-INPUT-ID 'ya existe. Escriba otro'
+      INTO PAJ-ERR
+    WRITE PAJ-ERR
+    ESCAPE MODULE
+*
+  END-NOREC
+*
+  EMPLEACM.PERSONNEL-ID :=   PAJ-INPUT-ID
+  EMPLEACM.FIRST-NAME   :=   EMPLEADOS.FIRST-NAME
+  EMPLEACM.NAME         :=   EMPLEADOS.NAME
+  EMPLEACM.CITY         :=   EMPLEADOS.CITY
+  EMPLEACM.SALARY       :=   EMPLEADOS.SALARY (1)
+*
+  INPUT USING MAP 'EMPLEACM'
+*
+* VALIDAR SI ALGÚN CAMPO ESTÁ VACÍO
+  IF
+*
+      EMPLEACM.PERSONNEL-ID = ' ' OR
+      EMPLEACM.FIRST-NAME   = ' ' OR
+      EMPLEACM.NAME         = ' ' OR
+      EMPLEACM.CITY         = ' ' OR
+      EMPLEACM.SALARY       = 0
+    REINPUT 'Algún campo está vacío'
+*      
+  ELSE /* Si pasa la validación
+*  
+    EMPLEADOS.PERSONNEL-ID    :=  PAJ-INPUT-ID /* Seguridad aunque lo cambien
+    EMPLEADOS.FIRST-NAME      :=  EMPLEACM.FIRST-NAME
+    EMPLEADOS.NAME            :=  EMPLEACM.NAME
+    EMPLEADOS.CITY            :=  EMPLEACM.CITY
+    EMPLEADOS.SALARY (1)      :=  EMPLEACM.SALARY
+*                              
+    UPDATE 
+    END TRANSACTION
+*
+    COMPRESS 'Usuario con PERSONNEL-ID :'
+      PAJ-INPUT-ID 'modificado con éxito'
+      INTO PAJ-ERR
+*        
+    WRITE PAJ-ERR
+*
+    ESCAPE ROUTINE
+* 
+  END-IF /* fin validación
+*
+END-FIND
+*
+**************
+END-SUBROUTINE
+**************
+*
+*
+END
+*
+*

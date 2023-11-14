@@ -1,0 +1,67 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* MAP2: PROTOTYPE VERSION 820 --- CREATED BY ONE 9.3.1 ---
+* INPUT USING MAP 'XXXXXXXX'
+*     EMPLEACM.CITY EMPLEACM.FIRST-NAME EMPLEACM.NAME EMPLEACM.PERSONNEL-ID
+*     EMPLEACM.SALARY EMPLEACM.TITULO-MAPA
+DEFINE DATA PARAMETER
+1 EMPLEACM.CITY (A020)
+1 EMPLEACM.FIRST-NAME (A020)
+1 EMPLEACM.NAME (A020)
+1 EMPLEACM.PERSONNEL-ID (A008)
+1 EMPLEACM.SALARY (N09.0)
+1 EMPLEACM.TITULO-MAPA (A050)
+END-DEFINE
+FORMAT PS=024 LS=080 ZP=OFF SG=OFF KD=OFF IP=OFF
+* MAP2: MAP PROFILES *****************************        200***********
+* .TTAAAMMOO   D I D I N D I D I        ?_)^&:+(                       *
+* 024079        N0NNUCN             X        01 SYSPROF NR             *
+************************************************************************
+INPUT          (     IP=OFF                                           /*
+                                                                       )
+/
+/
+/
+/
+ 022T EMPLEACM.TITULO-MAPA /*.01U050 A050 .
+      (AD=OD CD=BL )
+/
+/
+/
+ 022T 'PERSONNEL-ID'
+ 037T EMPLEACM.PERSONNEL-ID /*.99U008 A008 .
+      (AD=MDTE )
+/
+/
+ 024T 'FIRST-NAME'
+ 037T EMPLEACM.FIRST-NAME /*.99U020 A020 .
+      (AD=MDTE )
+/
+/
+ 030T 'NAME'
+ 037T EMPLEACM.NAME /*.99U020 A020 .
+      (AD=MDTE )
+/
+/
+ 030T 'CITY'
+ 037T EMPLEACM.CITY /*.99U020 A020 .
+      (AD=MDTE )
+/
+/
+ 028T 'SALARY'
+ 037T EMPLEACM.SALARY /*.99U009 N09.0.
+      (AD=MDTE )
+ 048T 'Numérico de 9'(PI)
+/
+/
+/
+/
+/
+/
+/
+/
+* MAP2: VALIDATION *****************************************************
+* MAP2: END OF MAP *****************************************************
+END

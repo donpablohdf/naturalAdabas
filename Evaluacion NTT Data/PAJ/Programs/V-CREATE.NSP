@@ -1,0 +1,46 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+DEFINE DATA LOCAL
+
+*
+
+* VISTAS 
+
+*
+
+1 VEHICLES VIEW OF VEHICLES
+
+  2 MATRICULA 
+
+  2 BASTIDOR 
+
+  2 PROPIETARIO-ID 
+
+  2 GRUPO-DETALLE
+
+    3 MARCA 
+
+    3 MODELO
+
+    3 COLOR 
+
+  2 ANIO 
+*
+END-DEFINE
+
+*
+WRITE *PROGRAM *DATE *USER
+
+PROPIETARIO-ID     := 'GGGGGG'
+MATRICULA          := 'B0800AA'
+BASTIDOR           := 38448
+MARCA              := 'ssAUDI'
+MODELO             := 'PANDA'
+COLOR              := 'AMARILLO'
+ANIO               := 2023
+
+STORE VEHICLES /* CREA NUEVO VEHICULO
+END TRANSACTION /* OBLIGATORIO PARA CREAR
+END
