@@ -32,9 +32,14 @@ LOCAL
   2 MARCA          (A20)
   2 MODELO         (A20)
 *
+1 EMP VIEW OF EMP /* Solución integridad referencial
+  2 AA-1 (A8) /* NC NN
+*
 1 PAJ-ACEPTAR (A1) /* aceptar ocpiones
 *
 1 PAJ-EMP-ISN (N10) /* almacena ISN de usuario
+1 PAJ-INT-ISN (N10) /* almacena ISN de usuario (integridad referencial)
+1 PAJ-VEH-ISN (N10) /* almacena ISN de vehículo
 *
 1 W-J (I4) 
 *
@@ -47,12 +52,15 @@ LOCAL
 *
 1 PAJ-ERR (A66)
 *
-* 1 #OP2 (N4)
 END-DEFINE 
 *
 FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
 *
   PAJ-EMP-ISN := *ISN
+*
+  FIND EMP WITH AA-1 = PAJ-INPUT-ID /* Solución integridad referencial
+    PAJ-INT-ISN := *ISN
+  END-FIND
 *
   FIND VEHICLES WITH  PROPIETARIO-ID = PAJ-INPUT-ID SORTED BY MATRICULA
 *
@@ -74,6 +82,7 @@ FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
     M-DE-VE.M-MARCA      (W-J)  :=   VEHICLES.MARCA
     M-DE-VE.M-MODELO     (W-J)  :=   VEHICLES.MODELO
 *
+* Llamamos a la subrutina que borra o transfiere
     PERFORM BORRA-CON
 *
   END-FIND /* fin búsqueda vehículos
@@ -89,9 +98,15 @@ DEFINE SUBROUTINE BORRA-SIN
 DECIDE ON FIRST VALUE PAJ-ACEPTAR
 *
   VALUE 'S'
+*
     GET EMPLOYEES PAJ-EMP-ISN
     DELETE
+*
+    GET EMP PAJ-INT-ISN /* Solución integridad referencial
+    DELETE
+*
     END TRANSACTION
+    WRITE 'Empleado borrado sin sus vehículos'
     ESCAPE MODULE
 *
   VALUE 'N'
@@ -120,11 +135,31 @@ INPUT USING MAP 'M-DE-VE'
 *
 DECIDE ON FIRST VALUE PAJ-ACEPTAR
 *
-  VALUE '1'
-    WRITE PAJ-EMP-ISN
-*     #OP2 := *LENGTH(M-DE-VE.M-ISN-VEH)
-*     WRITE #OP2
-    WRITE M-DE-VE.M-ISN-VEH (*)
+  VALUE '1' /* lo borramos con lo vehículos
+    FOR W-J = 1 TO 10 
+*
+      IF M-DE-VE.M-ISN-VEH    (W-J) NE 0
+        PAJ-VEH-ISN := M-DE-VE.M-ISN-VEH (W-J)
+        GET VEHICLES PAJ-VEH-ISN
+        DELETE
+        END TRANSACTION
+        RESET PAJ-VEH-ISN
+      END-IF
+*
+    END-FOR
+*
+*
+    GET EMP PAJ-INT-ISN /* Solución integridad referencial
+    DELETE
+    END TRANSACTION
+*
+    GET EMPLOYEES PAJ-EMP-ISN
+    DELETE
+    END TRANSACTION
+*
+    WRITE 'Empleado borrado CON sus vehículos'
+    ESCAPE MODULE
+*
   VALUE '2'
     WRITE 'transfiere'
   NONE VALUE

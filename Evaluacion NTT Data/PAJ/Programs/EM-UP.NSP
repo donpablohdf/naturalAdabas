@@ -94,7 +94,7 @@ END-FIND
 *
 * Hecho
 COMPRESS 'Usuario modificado' PAJ-INPUT-ID 'con éxito' INTO PAJ-ERR
-PAJ-ERR := PAJ-ERR
+WRITE PAJ-ERR
 *
 **************
 END-SUBROUTINE
@@ -102,3 +102,5 @@ END-SUBROUTINE
 *
 *
 END
+*
+*

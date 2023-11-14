@@ -15,12 +15,10 @@
 ************************MENÚ DE INICIO**********************************
 ************************************************************************
 *
-DEFINE DATA 
-LOCAL USING PAJ-I-TX
-LOCAL
+DEFINE DATA
 *
-1 PAJ-OPCION   (N1)
-1 PAJ-ERR      (A66)
+* Variables externas
+LOCAL USING PAJ-I-TX
 *
 END-DEFINE
 *
@@ -40,6 +38,7 @@ REPEAT
     NONE VALUE
       IGNORE
   END-DECIDE
+*
 END-REPEAT
 *
 *********************************

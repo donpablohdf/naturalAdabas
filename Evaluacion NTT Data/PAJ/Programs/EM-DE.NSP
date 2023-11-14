@@ -56,7 +56,7 @@ FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
   INPUT USING MAP 'M-5-OPS'
 *
   DECIDE ON EVERY VALUE OF PAJ-OPCION
-    VALUE 1 /* borrar sus vehiculos
+    VALUE 1 /* borrar con sus vehiculos
       CALLNAT PAJ-MENU.OP1-NOM-ARCH PAJ-INPUT-ID
     VALUE 2 /* solo el empleado
       CALLNAT  PAJ-MENU.OP2-NOM-ARCH PAJ-INPUT-ID
@@ -78,3 +78,5 @@ END-SUBROUTINE
 *
 *
 END
+*
+*

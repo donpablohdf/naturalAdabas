@@ -31,8 +31,8 @@ LOCAL
   2 CURR-CODE     (1)
   2 SALARY        (1)
 *
-1 EMP VIEW OF EMP
-  2 AA-1 (A8) /* NC NN
+1 EMP VIEW OF EMP /* Solución integridad referencial
+  2 AA-1 (A8) 
 
 END-DEFINE
 *
@@ -48,7 +48,6 @@ DEFINE SUBROUTINE VALIDACION-STORE
 *
 INPUT USING MAP 'CR-9-OPS'
 *
-* Convierte PERSONNEL-ID a mayúsculas
 PAJ-INPUT-ID := CR-9-OPS.OP1-VAR
 *
 * Convierte PERSONNEL-ID a mayúsculas
@@ -103,6 +102,8 @@ END-FIND
 *
 * Hecho
 END TRANSACTION
+*
+WRITE 'Usuario añadido con éxito'
 *
 COMPRESS PAJ-MSG-C PAJ-INPUT-ID INTO PAJ-ERR
 PAJ-ERR := PAJ-ERR

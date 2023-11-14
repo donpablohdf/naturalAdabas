@@ -8,7 +8,7 @@
 *                                                                      *
 *                                                                      *
 *   MODIFICADO POR PAJ                                                 *
-*                                                                      *
+*                        selección de empleado                      *
 *                                                                      *
 ************************************************************************
 *
@@ -23,9 +23,8 @@ LOCAL
   2 FIRST-NAME   (A20)
   2 NAME         (A20)
 *  
-* MAPA ALTA VEHICULO
 *
-1 MREADVDE  /* LEER VEHICULO DETALLE
+1 MREADVDE  /* Variables del mapa
 *
   2 M-SEL               (A1/10) 
   2 M-PERSONNEL-ID      (A8/10) 
@@ -114,4 +113,5 @@ END-SUBROUTINE
 **************
 *
 END
+*
 *

@@ -89,7 +89,7 @@ END-FIND
 * Hecho
 COMPRESS 'Vehículo matrícula ' CR-9-OPS.OP1-VAR ' creado con éxito' 
   INTO PAJ-ERR
-PAJ-ERR := PAJ-ERR
+WRITE PAJ-ERR
 *
 **************
 END-SUBROUTINE
