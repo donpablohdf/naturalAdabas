@@ -1,0 +1,121 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+* *
+* *
+* ** AUTOR: PAJ
+*
+** ** FECHA: 15 nov 2023
+* 
+* 
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+*
+DEFINE DATA LOCAL
+1 VEHICLES VIEW OF VEHICLES
+*
+  2 MATRICULA      (A15)
+  2 PROPIETARIO-ID (A8) 
+  2 MARCA          (A20)
+  2 MODELO         (A20)
+*
+1 EMPLOYEES VIEW OF EMPLOYEES
+*
+  2 PERSONNEL-ID (A8)
+  2 FIRST-NAME   (A20)
+  2 NAME         (A20)
+* 
+1 W-J (I4)
+1 W-I (I4)
+1 CONT (N8)
+
+1 M-DE-VE
+*
+  2 M-ISN-VEH      (N10/1:*) /* ISNs vehículos
+  2 M-MATRICULA    (A15/1:*) 
+  2 M-MARCA        (A20/1:*)
+  2 M-MODELO       (A20/1:*)
+*
+1 PAJ-ERR (A66)
+1 PAJ-ACEPTAR (A1) /* aceptar ocpiones
+
+1 #SUBARRAY (A20/1:10)
+END-DEFINE
+*
+
+*
+FIND VEHICLES WITH  PROPIETARIO-ID = '50005800' 
+  ADD 1 TO CONT
+END-FIND
+WRITE CONT
+
+EXPAND ARRAY M-ISN-VEH TO (1:CONT)
+EXPAND ARRAY M-MATRICULA TO (1:CONT)
+EXPAND ARRAY M-MARCA TO (1:CONT)
+EXPAND ARRAY M-MODELO TO (1:CONT)
+
+
+F1. FIND VEHICLES WITH  PROPIETARIO-ID = '50005800' 
+    SORTED BY MATRICULA
+*
+  IF NO RECORDS FOUND /* Si no tiene vehículos
+*
+    WRITE 'SIN VEHICULOS'
+*
+  END-NOREC
+*
+* Si el usuario tiene vehiculos rellenamos el mapa
+*
+  ADD 1 TO W-J
+* 
+
+  M-DE-VE.M-ISN-VEH    (W-J)  :=   *ISN
+  M-DE-VE.M-MATRICULA  (W-J)  :=   F1.MATRICULA
+  M-DE-VE.M-MARCA      (W-J)  :=   F1.MARCA
+  M-DE-VE.M-MODELO     (W-J)  :=   F1.MODELO
+
+*
+END-FIND
+RESET W-J
+FOR W-J = 1 TO CONT 
+  WRITE M-DE-VE.M-ISN-VEH (W-J)
+  WRITE 'numero' W-J
+END-FOR
+RESET W-J
+FOR W-I = 1 TO CONT
+* Llena el subarray
+  MOVE M-DE-VE.M-ISN-VEH(W-I) TO #SUBARRAY(W-J)
+
+* IMPRIME O PROCESA EL SUBARRAY CUANDO ALCANCE EL TAMAÑO DESEADO
+  IF W-J = 10
+    WRITE 'Subarray:' #SUBARRAY (W-J)
+    RESET W-J
+  END-IF
+
+* INCREMENTA EL ÍNDICE DEL SUBARRAY
+  ADD 1 TO W-J
+END-FOR
+
+* Imprime o procesa el último subarray si es necesario
+IF W-J > 0
+  WRITE 'Subarray:' #SUBARRAY (W-J)
+END-IF
+* Itera sobre el array original y divide en subarrays de tamaño 10
+* FOR W-J = 1 TO CONT STEP 10
+* * Calcula los índices de inicio y fin para el subarray actual
+*   #INICIO := W-J
+*  
+* 
+* * EXTRAE EL SUBARRAY UTILIZANDO SUBSTRING
+*   MOVE SUBSTRING(M-DE-VE.M-ISN-VEH(*), #INICIO, 10) TO #SUBARRAY
+* 
+* * IMPRIME O PROCESA EL SUBARRAY ACTUAL SEGÚN TUS NECESIDADES
+*   WRITE 'Subarray:' #SUBARRAY
+* END-FOR
+* Cargamos el mapa
+/*INPUT USING MAP 'M-DE-VE' 
+END

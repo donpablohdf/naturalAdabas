@@ -87,7 +87,7 @@ FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
 END-FIND
 *
 * Hecho
-COMPRESS 'Vehículo matrícula ' CR-9-OPS.OP1-VAR ' creado con éxito' 
+COMPRESS 'Vehículo matrícula ' CR-9-OPS.OP2-VAR ' creado con éxito' 
   INTO PAJ-ERR
 WRITE PAJ-ERR
 *

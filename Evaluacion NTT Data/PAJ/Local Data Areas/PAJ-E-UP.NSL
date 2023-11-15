@@ -17,6 +17,7 @@ DEFINE DATA LOCAL
 * Variables de control
 1 PAJ-ERR      (A66)
 1 PAJ-INPUT-ID (A8) INIT <' '>
+1 PAJ-C-IP (C)
 *
 1 CR-9-TXT
 *

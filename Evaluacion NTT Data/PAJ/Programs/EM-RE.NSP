@@ -15,7 +15,7 @@
 ************************************************************************
 *
 DEFINE DATA 
-*
+* Variables externas
 LOCAL USING PAJ-E-RE
 *
 LOCAL

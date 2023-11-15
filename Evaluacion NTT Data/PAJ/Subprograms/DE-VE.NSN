@@ -62,7 +62,8 @@ FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
     PAJ-INT-ISN := *ISN
   END-FIND
 *
-  FIND VEHICLES WITH  PROPIETARIO-ID = PAJ-INPUT-ID SORTED BY MATRICULA
+  F1. FIND VEHICLES WITH  PROPIETARIO-ID = PAJ-INPUT-ID 
+      SORTED BY MATRICULA
 *
     IF NO RECORDS FOUND /* Si no tiene vehículos
 *
@@ -77,15 +78,17 @@ FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
 *
     ADD 1 TO W-J
 * 
-    M-DE-VE.M-ISN-VEH    (W-J)  :=   *ISN
-    M-DE-VE.M-MATRICULA  (W-J)  :=   VEHICLES.MATRICULA
-    M-DE-VE.M-MARCA      (W-J)  :=   VEHICLES.MARCA
-    M-DE-VE.M-MODELO     (W-J)  :=   VEHICLES.MODELO
-*
-* Llamamos a la subrutina que borra o transfiere
-    PERFORM BORRA-CON
+    IF W-J <= 10
+      M-DE-VE.M-ISN-VEH    (W-J)  :=   *ISN
+      M-DE-VE.M-MATRICULA  (W-J)  :=   F1.MATRICULA
+      M-DE-VE.M-MARCA      (W-J)  :=   F1.MARCA
+      M-DE-VE.M-MODELO     (W-J)  :=   F1.MODELO
+    END-IF
 *
   END-FIND /* fin búsqueda vehículos
+*
+* Llamamos a la subrutina que borra o transfiere
+  PERFORM BORRA-CON
 *
 END-FIND /* fin búsqueda empleado
 *
@@ -106,7 +109,7 @@ DECIDE ON FIRST VALUE PAJ-ACEPTAR
     DELETE
 *
     END TRANSACTION
-    WRITE 'Empleado borrado sin sus vehículos'
+    WRITE 'Empleado borrado'
     ESCAPE MODULE
 *
   VALUE 'N'
@@ -131,12 +134,13 @@ DEFINE SUBROUTINE BORRA-CON
 RESET W-J
 RESET PAJ-ACEPTAR
 *
+* Cargamos el mapa
 INPUT USING MAP 'M-DE-VE'
 *
 DECIDE ON FIRST VALUE PAJ-ACEPTAR
 *
   VALUE '1' /* lo borramos con lo vehículos
-    FOR W-J = 1 TO 10 
+    FOR W-J = 1 TO 10 /* sacamos los ISN de los vehículos
 *
       IF M-DE-VE.M-ISN-VEH    (W-J) NE 0
         PAJ-VEH-ISN := M-DE-VE.M-ISN-VEH (W-J)
@@ -161,7 +165,27 @@ DECIDE ON FIRST VALUE PAJ-ACEPTAR
     ESCAPE MODULE
 *
   VALUE '2'
-    WRITE 'transfiere'
+*
+    CALLNAT "SEL-EM" PAJ-INPUT-ID
+*
+* Sacamos los ISN de los vehículos
+    FOR W-J = 1 TO 10 
+*
+      IF M-DE-VE.M-ISN-VEH    (W-J) NE 0
+        PAJ-VEH-ISN := M-DE-VE.M-ISN-VEH (W-J)
+*
+        GET VEHICLES  PAJ-VEH-ISN
+*
+        VEHICLES.PROPIETARIO-ID :=  PAJ-INPUT-ID
+        UPDATE
+        END TRANSACTION
+*
+        RESET PAJ-VEH-ISN
+      END-IF
+*
+    END-FOR
+
+*
   NONE VALUE
     PAJ-ERR := 'Opción no válida'
     REINPUT 'Opción no válida'

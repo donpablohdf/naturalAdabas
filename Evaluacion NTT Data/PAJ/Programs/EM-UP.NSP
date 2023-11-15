@@ -43,6 +43,7 @@ PERFORM VALIDACION-UPDATE
 DEFINE SUBROUTINE VALIDACION-UPDATE
 ************************************************************************
 *
+MOVE (AD=P) TO PAJ-C-IP
 * Busqueda de PERSONNEL-ID 
 FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
 *

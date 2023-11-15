@@ -4,7 +4,7 @@
     <DEFINITIONS>
         <DESCRIPTION>Report for DDM VEHICLES</DESCRIPTION>
         <RECORDLIMIT>0</RECORDLIMIT>
-        <FILTEREDBY>*ISN</FILTEREDBY>
+        <FILTEREDBY>&gt;&gt; Physical Read &lt;&lt;</FILTEREDBY>
         <OPTIONS>
             <USEEDITMASK>None</USEEDITMASK>
             <USEFIELDHEADER>None</USEFIELDHEADER>
@@ -54,8 +54,7 @@
             Name=".COUNTER" Type="#"/>
         <FIELD Checked="X" Editmask="" Format="P" Header="" Length="10"
             Level="1" Name="*ISN" Type="#">
-            <STARTVALUE index="1">770</STARTVALUE>
-            <ENDVALUE index="1">10000</ENDVALUE>
+            <STARTVALUE index="1">0</STARTVALUE>
         </FIELD>
     </GENERALFIELDS>
 </TEMPLATE>
