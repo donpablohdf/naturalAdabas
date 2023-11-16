@@ -43,7 +43,9 @@ PERFORM VALIDACION-UPDATE
 DEFINE SUBROUTINE VALIDACION-UPDATE
 ************************************************************************
 *
+* Bloquear el campo PERSONNEL-ID
 MOVE (AD=P) TO PAJ-C-IP
+*
 * Busqueda de PERSONNEL-ID 
 FIND EMPLOYEES WITH PERSONNEL-ID = PAJ-INPUT-ID
 *
