@@ -1,0 +1,113 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* MAP2: PROTOTYPE VERSION 820 --- CREATED BY ONE 9.3.1 ---
+* INPUT USING MAP 'XXXXXXXX'
+*     W-SUB-MAC(*) W-SUB-MAT(*) W-SUB-MOD(*)
+DEFINE DATA PARAMETER
+1 W-SUB-MAC (A020/00001:00010)
+1 W-SUB-MAT (A015/00001:00010)
+1 W-SUB-MOD (A020/00001:00010)
+END-DEFINE
+FORMAT PS=024 LS=080 ZP=OFF SG=OFF KD=OFF IP=OFF
+* MAP2: MAP PROFILES *****************************        200***********
+* .TTAAAMMOO   D I D I N D I D I        ?_)^&:+(                       *
+* 024079        N0NNUCN             X        01 SYSPROF NR             *
+************************************************************************
+INPUT          (     IP=OFF                                           /*
+                                                                       )
+/
+/
+ 003T '-' (075)
+/
+/
+ 019T 'Matrícula'
+ 029T 'Marca'
+ 050T 'Modelo'
+/
+ 013T W-SUB-MAT (1) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+   /**A1000100000100001000010000100001100010001001000001000HV
+ 029T W-SUB-MAC (1) /*.01U020 A020 .
+      (AD=ODL )
+   /**A1000100000100001000010000100001100010001001000001000HV
+ 050T W-SUB-MOD (1) /*.01U020 A020 .
+      (AD=ODL )
+   /**A1000100000100001000010000100001100010001001000001000HV
+/
+ 013T W-SUB-MAT (2) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T W-SUB-MAC (2) /*.01U020 A020 .
+      (AD=ODL )
+ 050T W-SUB-MOD (2) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 013T W-SUB-MAT (3) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T W-SUB-MAC (3) /*.01U020 A020 .
+      (AD=ODL )
+ 050T W-SUB-MOD (3) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 013T W-SUB-MAT (4) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T W-SUB-MAC (4) /*.01U020 A020 .
+      (AD=ODL )
+ 050T W-SUB-MOD (4) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 013T W-SUB-MAT (5) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T W-SUB-MAC (5) /*.01U020 A020 .
+      (AD=ODL )
+ 050T W-SUB-MOD (5) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 013T W-SUB-MAT (6) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T W-SUB-MAC (6) /*.01U020 A020 .
+      (AD=ODL )
+ 050T W-SUB-MOD (6) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 013T W-SUB-MAT (7) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T W-SUB-MAC (7) /*.01U020 A020 .
+      (AD=ODL )
+ 050T W-SUB-MOD (7) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 013T W-SUB-MAT (8) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T W-SUB-MAC (8) /*.01U020 A020 .
+      (AD=ODL )
+ 050T W-SUB-MOD (8) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 013T W-SUB-MAT (9) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T W-SUB-MAC (9) /*.01U020 A020 .
+      (AD=ODL )
+ 050T W-SUB-MOD (9) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 013T W-SUB-MAT (10) /*.01U015 A015 .
+      (AD=ODR CD=YE )
+ 029T W-SUB-MAC (10) /*.01U020 A020 .
+      (AD=ODL )
+ 050T W-SUB-MOD (10) /*.01U020 A020 .
+      (AD=ODL )
+/
+/
+/
+/
+/
+/
+/
+ 003T '-' (075)
+/
+/
+* MAP2: VALIDATION *****************************************************
+* MAP2: END OF MAP *****************************************************
+END
