@@ -119,11 +119,10 @@ FOR W-SEGMENT = 0 TO W-SEGMENTS
     END-IF
 
   END-FOR
-  WRITE NOTITLE W-SUB-ISN (*)
-  WRITE '------------------------------------------------'
+*
   INPUT USING MAP 'M-ARRX'
 *
-* Reset arrays mapa
+* Reset subarrays para el mapa
   RESET M-ARRX
 *
 /* reset de SUPER-ARR
@@ -133,7 +132,7 @@ FOR W-SEGMENT = 0 TO W-SEGMENTS
     END-FOR
   END-FOR
 *
-RESET R-ARR-A R-ARR-B
+  RESET R-ARR-A R-ARR-B
   NEWPAGE
 END-FOR
 *

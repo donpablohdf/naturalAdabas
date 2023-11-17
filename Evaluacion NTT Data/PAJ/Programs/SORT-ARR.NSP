@@ -17,23 +17,191 @@
 *
 DEFINE DATA
 LOCAL
-01 #A (I4)
-01 #B (I4)
-01 #T (I4)
-1 #ARRAY (N2/1:10,1:5) INIT (V,*) <6,8,9,12,15>
-1 REDEFINE #ARRAY
-  2 #AAA (N2/1:50)
-1 #TEMP (N2)
+*
+1 W-ROW (I4)
+1 W-COL (I4)
+*
+1 W-ROW-SORT (I4) INIT <1>
+1 W-COL-SORT (I4)
+*
+1 W-H (I4)
+1 W-TEMP (A3)
+1 W-TEMP-N (N3)
+*
+1 W-ARRAY (N2/1:5) INIT <61,85,92,12,15>
+1 ARR-SHORT(N2/1:5)
+*
+1 W-ARRAY-B (A3/1:2, 1:2) 
+*                                       
+1 W-AVG          (P11)                                                   
+1 W-TOTAL-TOTAL  (P11)                                                   
+1 W-TOTAL-SALARY (P11)                                                   
+1 W-AVER-PERCENT (N3.2)
+*
+1 VEHIC-VIEW VIEW OF VEHICLES                                           
+  2 MARCA 
+  2 MODELO                                                               
+  2 ANIO 
+  2 PROPIETARIO-ID
+*
+1 EMPL-VIEW VIEW OF EMPLOYEES                                           
+  2 CITY                                                                
+  2 SALARY      (1:2)                                                   
+  2 PERSONNEL-ID                                                        
+  2 CURR-CODE   (1:2)  
 *
 END-DEFINE
 *
-FOR #A = 1 TO 10
-  FOR #B = 1 TO 5
-    MOVE #ARRAY (#A,#B) TO #TEMP
-END-ALL
-SORT BY #TEMP USING KEYS
-  ADD 1 TO #T
-  MOVE #TEMP TO #AAA (#T)
-END-SORT
-WRITE #ARRAY (*,*)
+*
+**************************************************************
+*            ORDENACION UNA DIMENSION
+**************************************************************
+*
+* FOR W-A = 1 TO 2
+*   MOVE W-ARRAY (W-A) TO W-TEMP
+* END-ALL
+* SORT BY W-TEMP USING KEYS
+*   ADD 1 TO W-T
+*   MOVE W-TEMP TO ARR-SHORT (W-T)
+* END-SORT
+* *
+* WRITE W-ARRAY (*)
+* WRITE ARR-SHORT (*)
+* *
+*
+*
+* en el mismo array
+*
+*                                                          
+* WRITE   'Array before SORT:' W-ARRAY(*) /                                 
+* *                                                                      
+* FOR W-ROW := 1 TO 5
+* *                                                     
+*   W-TEMP-N := W-ARRAY(W-ROW)                                                       
+*   WRITE W-TEMP-N '<-- Put into SORT record'
+* *                                 
+* END-ALL  
+* SORT W-TEMP-N USING KEYS
+* *                                                    
+*   WRITE W-TEMP-N '<-- Get from SORT'  
+*   W-ARRAY(W-ROW-SORT) := W-TEMP-N                                       
+*   ADD 1 TO W-ROW-SORT
+* *                                                    
+* END-SORT 
+* *
+* WRITE  / 'Array before SORT:' W-ARRAY(*) 
+*                               
+*
+* ARRAY BIDIMENSIONAL
+* SALIDA: LMN DEF XYZ PQR 
+*
+* W-ROW-SORT := 1
+* *
+* W-ARRAY-B(1,1) := 'XYZ'
+* W-ARRAY-B(1,2) := 'PQR'
+* W-ARRAY-B(2,1) := 'LMN'
+* W-ARRAY-B(2,2) := 'DEF'
+* *
+* WRITE   'Array before SORT:' W-ARRAY-B(*,*) /     
+* *                                                                      
+* FOR W-ROW := 1 TO 2  
+*   FOR W-COL := 1 TO 2
+* *  
+*     W-TEMP := W-ARRAY-B(W-ROW,W-COL)
+* *
+*     WRITE  'W-ARRAY-B(' W-ROW', 'W-COL ') :=' W-TEMP
+*     WRITE W-TEMP '<-- Put W-COL into SORT record'
+* END-ALL  
+* SORT W-TEMP USING KEYS  /* 30 veces                                                    
+* *  WRITE W-TEMP '<-- Get from SORT'                                         
+*   ADD 1 TO W-COL-SORT
+* *
+*   IF W-COL-SORT >= 3
+*     ADD 1 TO W-ROW-SORT
+*     W-COL-SORT := 1
+*     WRITE '*' (40)
+*   END-IF     
+* *                                                  
+*   W-ARRAY-B(W-ROW-SORT,W-COL-SORT) := W-TEMP
+* *
+*   WRITE  'W-ARRAY-B(' W-ROW-SORT', 'W-COL-SORT') :=' W-TEMP
+* *
+* END-SORT                                                               
+* *                                                                      
+* WRITE / 'Array after  SORT:' W-ARRAY-B(*,*)
+*
+*******************************************************
+*             ORDENAR CONSULTA READ
+*******************************************************
+*
+* READ (10) VEHIC-VIEW                                                         
+* END-ALL                                                                 
+* SORT BY MARCA ANIO USING KEY  
+* *                                     
+*   DISPLAY NOTITLE (AL=15) MARCA (IS=ON) ANIO
+* *                          
+*   AT BREAK OF MARCA                                                      
+*     WRITE '-' (20)                                                      
+*   END-BREAK
+* *                                                           
+* END-SORT
+*
+*
+*******************************************************
+*              ORDENAR CONSULTA FIND
+*******************************************************
+*
+* FIND (30) VEHIC-VIEW WITH PROPIETARIO-ID = '50005800'                                                       
+* END-ALL                                                                 
+* SORT BY MARCA MODELO ANIO USING KEY
+* *                                     
+*   DISPLAY NOTITLE (AL=15) MARCA (IS=ON) MODELO (IS=ON) ANIO
+* *                            
+*   AT BREAK OF MARCA                                                      
+*     WRITE '-' (20)                                                      
+*   END-BREAK
+* *                                                           
+* END-SORT
+*
+*
+********************************************************
+*               ORDENACION AVANZADA
+********************************************************
+* *
+FIND (3) EMPL-VIEW WITH CITY = 'BOSTON'                                     
+  COMPUTE W-TOTAL-SALARY = SALARY (1) + SALARY (2)                       
+  ACCEPT IF W-TOTAL-SALARY GT 0  /* ACEPTA SI ES MAYOR DE CERO                                        
+  /*                                                           
+END-ALL  
+*                                                      
+  AND
+*                                                          
+SORT BY PERSONNEL-ID USING W-TOTAL-SALARY SALARY(*) CURR-CODE(1)
+    GIVE AVER(W-TOTAL-SALARY)
+  /*                                                           
+  AT START OF DATA                                             
+    WRITE NOTITLE '*' (40)                                     
+      'SALARIO TOTAL PROMEDIO:' *AVER (W-TOTAL-SALARY) /
+*              
+    MOVE *AVER (W-TOTAL-SALARY) TO W-AVG  
+*                           
+  END-START  
+  /*                                                  
+  COMPUTE ROUNDED W-AVER-PERCENT = W-TOTAL-SALARY / W-AVG * 100 
+  /*  
+  ADD W-TOTAL-SALARY TO W-TOTAL-TOTAL                            
+  /*                                                           
+  DISPLAY NOTITLE PERSONNEL-ID SALARY (1) SALARY (2)           
+    W-TOTAL-SALARY CURR-CODE (1)
+    'PERCENT/OF/AVER' W-AVER-PERCENT
+  /*                         
+  AT END OF DATA                                               
+    WRITE / '*' (40) 'TOTAL SALARIOS : ' W-TOTAL-TOTAL      
+  END-ENDDATA
+  /*
+END-SORT  
+*
+*
 END
+*
+*
