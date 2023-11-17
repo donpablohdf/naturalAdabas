@@ -1,0 +1,8 @@
+DEFINE DATA PARAMETER
+/* >Natural Source Header 000000
+/* :Mode S
+/* :CP
+/* <Natural Source Header
+*************************SELECCIONAR USUARIO SEL-EM****************************
+1 PAJ-INPUT-ID (A8) 
+END-DEFINE

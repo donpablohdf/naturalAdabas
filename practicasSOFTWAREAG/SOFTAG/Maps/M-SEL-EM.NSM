@@ -1,0 +1,143 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* MAP2: PROTOTYPE VERSION 820 --- CREATED BY ONE 9.3.1 ---
+* INPUT USING MAP 'XXXXXXXX'
+*     M-FILTRO-NAME M-FIRST-NAME(*) M-NAME(*) M-PERSONNEL-ID(*) M-SEL(*)
+DEFINE DATA PARAMETER
+1 M-FILTRO-NAME (A020)
+1 M-FIRST-NAME (A020/00001:00010)
+1 M-NAME (A020/00001:00010)
+1 M-PERSONNEL-ID (A008/00001:00010)
+1 M-SEL (A001/00001:00010)
+END-DEFINE
+FORMAT PS=024 LS=080 ZP=OFF SG=OFF KD=OFF IP=OFF
+* MAP2: MAP PROFILES *****************************        200***********
+* .TTAAAMMOO   D I D I N D I D I        ?_)^&:+(                       *
+* 024079        N0NNUCN             X        01 SYSPROF NR             *
+************************************************************************
+INPUT          (     IP=OFF                                           /*
+                                                                       )
+/
+ 027T 'SELECCIÓN DE EMPLEADO'(BL)
+/
+ 003T '-' (075)
+/
+ 007T 'Nombre para buscar:'
+ 029T M-FILTRO-NAME /*.99U020 A020 .
+      (AD=MDT )
+/
+/
+ 017T 'SEL'
+ 021T 'PERSONNEL-ID'
+ 038T 'NAME'
+ 047T 'FIRST-NAME'
+/
+ 018T M-SEL (1) /*.99U001 A001 .
+      (AD=MDT )
+   /**A1000100000100001000010000100001100010001001000001000HV
+ 023T M-PERSONNEL-ID (1) /*.01U008 A008 .
+      (AD=ODR )
+   /**A1000100000100001000010000100001100010001001000001000HV
+ 035T M-NAME (1) /*.01U010 A020 .
+      (AD=ODR AL=010 )
+   /**A1000100000100001000010000100001100010001001000001000HV
+ 047T M-FIRST-NAME (1) /*.01U020 A020 .
+      (AD=ODL )
+   /**A1000100000100001000010000100001100010001001000001000HV
+/
+ 018T M-SEL (2) /*.99U001 A001 .
+      (AD=MDT )
+ 023T M-PERSONNEL-ID (2) /*.01U008 A008 .
+      (AD=ODR )
+ 035T M-NAME (2) /*.01U010 A020 .
+      (AD=ODR AL=010 )
+ 047T M-FIRST-NAME (2) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 018T M-SEL (3) /*.99U001 A001 .
+      (AD=MDT )
+ 023T M-PERSONNEL-ID (3) /*.01U008 A008 .
+      (AD=ODR )
+ 035T M-NAME (3) /*.01U010 A020 .
+      (AD=ODR AL=010 )
+ 047T M-FIRST-NAME (3) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 018T M-SEL (4) /*.99U001 A001 .
+      (AD=MDT )
+ 023T M-PERSONNEL-ID (4) /*.01U008 A008 .
+      (AD=ODR )
+ 035T M-NAME (4) /*.01U010 A020 .
+      (AD=ODR AL=010 )
+ 047T M-FIRST-NAME (4) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 018T M-SEL (5) /*.99U001 A001 .
+      (AD=MDT )
+ 023T M-PERSONNEL-ID (5) /*.01U008 A008 .
+      (AD=ODR )
+ 035T M-NAME (5) /*.01U010 A020 .
+      (AD=ODR AL=010 )
+ 047T M-FIRST-NAME (5) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 018T M-SEL (6) /*.99U001 A001 .
+      (AD=MDT )
+ 023T M-PERSONNEL-ID (6) /*.01U008 A008 .
+      (AD=ODR )
+ 035T M-NAME (6) /*.01U010 A020 .
+      (AD=ODR AL=010 )
+ 047T M-FIRST-NAME (6) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 018T M-SEL (7) /*.99U001 A001 .
+      (AD=MDT )
+ 023T M-PERSONNEL-ID (7) /*.01U008 A008 .
+      (AD=ODR )
+ 035T M-NAME (7) /*.01U010 A020 .
+      (AD=ODR AL=010 )
+ 047T M-FIRST-NAME (7) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 018T M-SEL (8) /*.99U001 A001 .
+      (AD=MDT )
+ 023T M-PERSONNEL-ID (8) /*.01U008 A008 .
+      (AD=ODR )
+ 035T M-NAME (8) /*.01U010 A020 .
+      (AD=ODR AL=010 )
+ 047T M-FIRST-NAME (8) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 018T M-SEL (9) /*.99U001 A001 .
+      (AD=MDT )
+ 023T M-PERSONNEL-ID (9) /*.01U008 A008 .
+      (AD=ODR )
+ 035T M-NAME (9) /*.01U010 A020 .
+      (AD=ODR AL=010 )
+ 047T M-FIRST-NAME (9) /*.01U020 A020 .
+      (AD=ODL )
+/
+ 018T M-SEL (10) /*.99U001 A001 .
+      (AD=MDT )
+ 023T M-PERSONNEL-ID (10) /*.01U008 A008 .
+      (AD=ODR )
+ 035T M-NAME (10) /*.01U010 A020 .
+      (AD=ODR AL=010 )
+ 047T M-FIRST-NAME (10) /*.01U020 A020 .
+      (AD=ODL )
+/
+/
+/
+ 003T '''X'' : Seleccionar usuario'
+ 067T 'PF3<SALIR>'
+/
+ 003T '-' (075)
+/
+/
+/
+/
+* MAP2: VALIDATION *****************************************************
+* MAP2: END OF MAP *****************************************************
+END
