@@ -8,7 +8,6 @@ DEFINE DATA LOCAL
 *
 * Para conversion
 1 PAJ-FECHA-A25        (A25) 
-1 PAJ-FECHA-D          (D) 
 *
 1 SALARY-A9          (A9)
 *
