@@ -1,0 +1,44 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+* *
+* *
+* ** AUTOR: PAJ
+*
+** ** FECHA: 19 nov 2023
+* 
+* 
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+*
+DEFINE DATA LOCAL
+1 #DATE-N (N8)
+1 REDEFINE #DATE-N
+   2 #YYP (N4)
+   2 #MMP (N2)
+   2 #DDP (N2)
+END-DEFINE
+*
+SET KEY PF1=HELP
+*
+**MOVE 11 TO #MMP
+*
+* UNCOMMENT THE MOVE ABOVE TO SEE THE EFFECT
+* OF A PARTIAL SELECTION
+*
+INPUT (AD=M)
+5/10 'ENTER DATE (YYYYMMDD) OR HIT PF1 FOR HELP'
+#DATE-N(EM=99999999 HE='CALEND10')
+*
+IF #DATE-N NE 0
+WRITE 5/10 'YOU SELECTED YEAR:' #YYP
+           2X 'MONTH:' #MMP 2X 'DAY:' #DDP
+ELSE
+WRITE 5/10 'YOU DID NOT ENTER ANYTHING'
+END-IF
+*
+END 
